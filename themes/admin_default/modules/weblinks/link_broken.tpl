@@ -1,8 +1,8 @@
 <!-- BEGIN: main -->
 <div id="list_mods">
 	<!-- BEGIN: data -->
-	<form name="delbroken" method="post" action="{FORM_ACTION}">
-		<table class="tab1">
+	<form class="form-inline" name="delbroken" method="post" action="{FORM_ACTION}">
+		<table class="table table-striped table-bordered table-hover">
 			<caption>{LANG.weblink_link_recent}</caption>
 			<thead>
 				<tr>
@@ -13,36 +13,38 @@
 					<td>{LANG.weblink_inhome}</td>
 				</tr>
 			</thead>
-			<!-- BEGIN: loop -->
-			<tbody{ROW.class}>
+			<tfoot>
+				<tr>
+					<td colspan="8"><input class="btn btn-primary" type="submit" value="{LANG.link_broken_out}"></td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<!-- BEGIN: loop -->
 				<tr>
 					<td><input type="checkbox" name="idcheck[]" value="{ROW.id}"></td>
 					<td>{ROW.title}</td>
 					<td>{ROW.url}</td>
 					<td>{ROW.type}</td>
-					<td><span class="edit_icon"><a href="{ROW.url_edit}">{LANG.weblink_method_edit}</a></span></td>
+					<td><a class="edit_icon" href="{ROW.url_edit}">{LANG.weblink_method_edit}</a></td>
 				</tr>
+				<!-- END: loop -->
 			</tbody>
-			<!-- END: loop -->
-			<tfoot>
-				<tr>
-					<td colspan="8"><input type="submit" value="{LANG.link_broken_out}"></td>
-				</tr>
-			</tfoot>
 		</table>
 	</form>
 	<!-- END: data -->
 	<!-- BEGIN: empty -->
-	<table class="tab1">
+	<table class="table table-striped table-bordered table-hover">
 		<tbody>
 			<tr>
-				<td align="center">{LANG.weblink_link_broken}</td>
+				<td class="text-center">{LANG.weblink_link_broken}</td>
 			</tr>
 		</tbody>
 	</table>
 	<!-- END: empty -->
 </div>
 <!-- BEGIN: generate_page -->
-<p align="center">{GENERATE_PAGE}</p>
+<p class="text-center">
+	{GENERATE_PAGE}
+</p>
 <!-- END: generate_page -->
 <!-- END: main -->

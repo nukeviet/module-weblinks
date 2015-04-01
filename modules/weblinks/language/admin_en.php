@@ -1,12 +1,13 @@
 <?php
 
 /**
-* @Project NUKEVIET 3.x
-* @Author VINADES.,JSC (contact@vinades.vn)
-* @Copyright (C) 2012 VINADES.,JSC. All rights reserved
-* @Language English
-* @Createdate Mar 04, 2010, 08:22:00 AM
-*/
+ * @Project NUKEVIET 4.x
+ * @Author VINADES.,JSC (contact@vinades.vn)
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @Language English
+ * @License CC BY-SA (http://creativecommons.org/licenses/by-sa/4.0/)
+ * @Createdate Mar 04, 2010, 08:22:00 AM
+ */
 
 if( ! defined( 'NV_ADMIN' ) or ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
@@ -21,6 +22,9 @@ $lang_module['categories'] = 'Categories';
 $lang_module['save'] = 'Save';
 $lang_module['errorsave'] = 'Error:Update data fail';
 $lang_module['saveok'] = 'Update succesfully';
+$lang_module['confirm'] = 'Nếu thực hiện thao tác này bạn sẽ không thể phục hồi lại dữ liệu. Bạn có chắc chắc muốn xoá ?';
+$lang_module['action'] = 'Thao tác';
+$lang_module['msgnocheck'] = 'Hãy chọn ít nhất một dòng để thực hiện';
 $lang_module['alias'] = 'Alias';
 $lang_module['name'] = 'Title';
 $lang_module['weight'] = 'Position';
@@ -120,5 +124,3 @@ $lang_module['link_broken_out'] = 'Remove broken link';
 $lang_module['config_error_per_page'] = 'Error: Not on per_page field';
 $lang_module['siteinfo_numberlink'] = 'Total links';
 $lang_module['siteinfo_error'] = 'Bad link reports';
-
-?>
