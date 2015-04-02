@@ -1,12 +1,13 @@
 <?php
 
 /**
-* @Project NUKEVIET 3.x
-* @Author VINADES.,JSC (contact@vinades.vn)
-* @Copyright (C) 2012 VINADES.,JSC. All rights reserved
-* @Language Français
-* @Createdate Jun 30, 2010, 10:40:00 AM
-*/
+ * @Project NUKEVIET 4.x
+ * @Author VINADES.,JSC (contact@vinades.vn)
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @Language Français
+ * @License CC BY-SA (http://creativecommons.org/licenses/by-sa/4.0/)
+ * @Createdate Jun 30, 2010, 10:40:00 AM
+ */
 
 if( ! defined( 'NV_ADMIN' ) or ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
@@ -21,6 +22,9 @@ $lang_module['categories'] = 'Catégories';
 $lang_module['save'] = 'Sauver';
 $lang_module['errorsave'] = 'Erreur: Mise à jour de données échouée';
 $lang_module['saveok'] = 'Mise à jour réussie';
+$lang_module['confirm'] = 'Nếu thực hiện thao tác này bạn sẽ không thể phục hồi lại dữ liệu. Bạn có chắc chắc muốn xoá ?';
+$lang_module['action'] = 'Thao tác';
+$lang_module['msgnocheck'] = 'Hãy chọn ít nhất một dòng để thực hiện';
 $lang_module['alias'] = 'Alias';
 $lang_module['name'] = 'Titre';
 $lang_module['weight'] = 'Position';
@@ -120,5 +124,3 @@ $lang_module['link_broken_out'] = 'Supprimer le lien cassé';
 $lang_module['config_error_per_page'] = 'Erreur: par_page';
 $lang_module['siteinfo_numberlink'] = 'Total des liens';
 $lang_module['siteinfo_error'] = 'Rapports de liens cassés';
-
-?>

@@ -1,45 +1,86 @@
 /**
- * @Project NUKEVIET 3.x
+ * @Project NUKEVIET 4.x
  * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2012 VINADES.,JSC. All rights reserved
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @License GNU/GPL version 2 or any later version
  * @Createdate 1 - 31 - 2010 5 : 12
  */
 
-// Xu ly cat ---------------------------------------
+// Xu ly cat
 
-function nv_chang_cat(object, catid, mod )
-{
-	var new_vid = $(object).val();
-	nv_ajax( "post", script_name, nv_name_variable+'='+nv_module_name+'&'+nv_fc_variable + '=change_cat&catid=' + catid + '&mod='+mod+'&new_vid=' + new_vid + '&num=' + nv_randomPassword( 8 ), '', 'nv_chang_cat_result' );
-	return;
+function nv_chang_cat(object, catid, mod) {
+    var new_vid = $(object).val();
+    $.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=change_cat&nocache=' + new Date().getTime(), 'catid=' + catid + '&mod=' + mod + '&new_vid=' + new_vid, function(res) {
+        location.reload();
+    });
+    return;
 }
 
-//  ---------------------------------------
+function nv_del_cat(catid) {
+    if (confirm(nv_is_del_confirm[0])) {
+        $.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=del_cat&nocache=' + new Date().getTime(), 'catid=' + catid, function(res) {
+            var r_split = res.split("_");
+            if (r_split[0] == 'OK') {
+                 location.reload();
+            } else if (r_split[0] == 'ERR') {
+                alert(r_split[1]);
+            } else {
+                alert(nv_is_del_confirm[2]);
+            }
+        });
+    }
+    return false;
+}
 
-function nv_chang_cat_result( res )
-{
-	window.location = url_back;
+function nv_del_rows(id) {
+	if (confirm(nv_is_del_confirm[0])) {
+		$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=del_link&nocache=' + new Date().getTime(), 'id=' + id, function(res) {
+			var r_split = res.split('_');
+			if (r_split[0] == 'OK') {
+				alert(r_split[1]);
+				location.reload();
+			} else if (r_split[0] == 'NO') {
+				alert(r_split[1]);
+			} else {
+				alert(nv_is_del_confirm[2]);
+			}
+		});
+	}
 	return false;
 }
 
-function nv_del_cat(catid)
-{
-   if (confirm(nv_is_del_confirm[0]))
-   {
-      nv_ajax( 'post', script_name, nv_name_variable+'='+nv_module_name+'&'+nv_fc_variable + '=del_cat&catid=' + catid, '', 'nv_del_cat_result' );
-   }
-   return false;
-}
-
-function nv_del_cat_result(res)
-{
-	var r_split = res.split( "_" );
-	if (r_split[0] == 'OK') {
-		window.location = url_back;
-	} else if (r_split[0] == 'ERR') {
-		alert(r_split[1]);
+function nv_del_select_rows( oForm, msgnocheck ) {
+ 
+	var fa = oForm['idcheck[]'];
+	var listid = '';
+	if (fa.length) {
+		for (var i = 0; i < fa.length; i++) {
+			if (fa[i].checked) {
+				listid = listid + ',' + fa[i].value;
+			}
+		}
 	} else {
-		alert(nv_is_del_confirm[2]);
+		if (fa.checked) {
+			listid = listid + ',' + fa.value;
+		}
+	}
+	if (listid != '') {
+		if (confirm(nv_is_del_confirm[0])) {
+			$.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=del_link&nocache=' + new Date().getTime(), 'listid=' + listid, function(res) {
+				var r_split = res.split('_');
+				if (r_split[0] == 'OK') {
+					alert(r_split[1]);
+					location.reload();
+				} else if (r_split[0] == 'NO') {
+					alert(r_split[1]);
+				} else {
+					alert(nv_is_del_confirm[2]);
+				}
+			});
+		}
+	}
+	else {
+		alert(msgnocheck);
 	}
 	return false;
 }

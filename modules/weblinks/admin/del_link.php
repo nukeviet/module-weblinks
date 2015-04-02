@@ -1,69 +1,69 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.x
+ * @Project NUKEVIET 4.x
  * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2012 VINADES.,JSC. All rights reserved
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @License GNU/GPL version 2 or any later version
  * @Createdate 2-9-2010 14:43
  */
 
 if( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
-$page_title = $lang_module['weblink_del_link_title'];
+if( ! defined( 'NV_IS_AJAX' ) ) die( 'Wrong URL' );
 
-$id = ( $nv_Request->get_int( 'id', 'get' ) > 0 ) ? $nv_Request->get_int( 'id', 'post,get' ) : 0;
+$id = $nv_Request->get_int( 'id', 'post', 0 );
 
-if( empty( $id ) )
+$listid = $nv_Request->get_string( 'listid', 'post', '' );
+
+if( $listid != '' )
 {
-	Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name );
-	die();
+	$del_array = array_map( 'intval', explode( ',', $listid ) );
+}
+elseif( $id )
+{
+	$del_array = array( $id );
 }
 
-$xtpl = new XTemplate( "del_link.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file );
-$xtpl->assign( 'LANG', $lang_module );
-
-$submit = $nv_Request->get_string( 'submit', 'post' );
-if( ! empty( $submit ) )
+if( ! empty( $del_array ) )
 {
-	$confirm = $nv_Request->get_int( 'confirm', 'post' );
-	if( $confirm == 1 )
+	$a = 0;
+	foreach( $del_array as $id )
 	{
-		$sql = "DELETE FROM `" . NV_PREFIXLANG . "_" . $module_data . "_rows` WHERE id=" . $id;
-		
-		if( $db->sql_query( $sql ) )
+		list( $id, $title, $urlimg ) = $db->query( 'SELECT id, title, urlimg  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $id )->fetch( 3 );
+		if( $id > 0 )
 		{
-			$db->sql_freeresult();
-			$msg = $lang_module['weblink_del_success'];
+			nv_insert_logs( NV_LANG_DATA, $module_name, 'log_del_rows', $title, $admin_info['userid'] );
+
+			$db->exec( 'DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $id );
+
+			if( ! empty( $urlimg ) )
+			{
+				@unlink( NV_ROOTDIR . '/' . NV_UPLOADS_DIR . '/' . $urlimg );
+				$_did = $db->query( 'SELECT did FROM ' . NV_UPLOAD_GLOBALTABLE . '_dir WHERE dirname=' . $db->quote( dirname( NV_UPLOADS_DIR . '/' . $urlimg ) ) )->fetchColumn();
+				$db->query( 'DELETE FROM ' . NV_UPLOAD_GLOBALTABLE . '_file WHERE did = ' . $_did . ' AND title=' . $db->quote( basename( $urlimg ) ) );
+			}
+			++$a;
+		}
+		if( $a > 0 )
+		{
+			nv_del_moduleCache( $module_name );
+			$contents = 'OK_' . $lang_module['weblink_del_success'];
 		}
 		else
 		{
-			$msg = $lang_module['weblink_del_error'];
+
+			$contents = 'NO_' . $lang_module['weblink_del_error'];
 		}
-		
-		if( $msg != '' )
-		{
-			$xtpl->assign( 'ERROR', $msg );
-			$xtpl->parse( 'main.error' );
-		}
-		
-		nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['weblink_del_link_title'], "id " . $id, $admin_info['userid'] );
-	}
-	else
-	{
-		Header( "Location: " . NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "" );
 	}
 }
 else
-{	
-	$xtpl->assign( 'ID', $id );
-	$xtpl->parse( 'main.confirm' );
+{
+
+	$contents = 'NO_' . $lang_module['weblink_del_err'];
+
 }
 
-$xtpl->parse( 'main' );
-$contents = $xtpl->text( 'main' );
-
-include ( NV_ROOTDIR . "/includes/header.php" );
-echo nv_admin_theme( $contents );
-include ( NV_ROOTDIR . "/includes/footer.php" );
-
-?>
+include NV_ROOTDIR . '/includes/header.php';
+echo $contents;
+include NV_ROOTDIR . '/includes/footer.php';

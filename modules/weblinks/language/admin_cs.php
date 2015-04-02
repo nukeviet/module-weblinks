@@ -1,12 +1,13 @@
 <?php
 
 /**
-* @Project NUKEVIET 3.x
-* @Author VINADES.,JSC (contact@vinades.vn)
-* @Copyright (C) 2012 VINADES.,JSC. All rights reserved
-* @Language česky
-* @Createdate Aug 01, 2010, 02:40:00 PM
-*/
+ * @Project NUKEVIET 4.x
+ * @Author VINADES.,JSC (contact@vinades.vn)
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @Language česky
+ * @License CC BY-SA (http://creativecommons.org/licenses/by-sa/4.0/)
+ * @Createdate Aug 01, 2010, 02:40:00 PM
+ */
 
 if( ! defined( 'NV_ADMIN' ) or ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
@@ -21,6 +22,9 @@ $lang_module['categories'] = 'Kategorie';
 $lang_module['save'] = 'Uložit';
 $lang_module['errorsave'] = 'Chyba: Aktualizace data selže';
 $lang_module['saveok'] = 'Aktualizovat úspěšně';
+$lang_module['confirm'] = 'Nếu thực hiện thao tác này bạn sẽ không thể phục hồi lại dữ liệu. Bạn có chắc chắc muốn xoá ?';
+$lang_module['action'] = 'Thao tác';
+$lang_module['msgnocheck'] = 'Hãy chọn ít nhất một dòng để thực hiện';
 $lang_module['alias'] = 'Statické odkazy';
 $lang_module['name'] = 'Název';
 $lang_module['weight'] = 'Pozice';
@@ -120,5 +124,3 @@ $lang_module['link_broken_out'] = 'Odstranit nefunkční odkaz';
 $lang_module['config_error_per_page'] = 'Chyba: Nestane v per_page poli';
 $lang_module['siteinfo_numberlink'] = 'Celkem odkazy';
 $lang_module['siteinfo_error'] = 'Přerušený odkaz';
-
-?>

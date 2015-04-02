@@ -1,12 +1,13 @@
 <?php
 
 /**
-* @Project NUKEVIET 3.x
-* @Author VINADES.,JSC (contact@vinades.vn)
-* @Copyright (C) 2012 VINADES.,JSC. All rights reserved
-* @Language Türkçe
-* @Createdate Oct 25, 2012, 03:11:41 PM
-*/
+ * @Project NUKEVIET 4.x
+ * @Author VINADES.,JSC (contact@vinades.vn)
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @Language Türkçe
+ * @License CC BY-SA (http://creativecommons.org/licenses/by-sa/4.0/)
+ * @Createdate Oct 25, 2012, 03:11:41 PM
+ */
 
 if( ! defined( 'NV_ADMIN' ) or ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
@@ -21,6 +22,9 @@ $lang_module['categories'] = 'Kategoriler';
 $lang_module['save'] = 'kaydet';
 $lang_module['errorsave'] = 'Hata: Güncelleme başarısız';
 $lang_module['saveok'] = 'Güncelleme Başarılı';
+$lang_module['confirm'] = 'Nếu thực hiện thao tác này bạn sẽ không thể phục hồi lại dữ liệu. Bạn có chắc chắc muốn xoá ?';
+$lang_module['action'] = 'Thao tác';
+$lang_module['msgnocheck'] = 'Hãy chọn ít nhất một dòng để thực hiện';
 $lang_module['alias'] = 'Statik Link';
 $lang_module['name'] = 'Başlık';
 $lang_module['weight'] = 'Pozisyon';
@@ -120,5 +124,3 @@ $lang_module['link_broken_out'] = 'Kırık link Kaldır';
 $lang_module['config_error_per_page'] = 'Error: Not on per_page field';
 $lang_module['siteinfo_numberlink'] = 'Toplam linkler';
 $lang_module['siteinfo_error'] = 'Kötü bağlantı bildirimleri';
-
-?>
