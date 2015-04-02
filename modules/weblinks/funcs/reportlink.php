@@ -15,17 +15,16 @@ $report_id = $nv_Request->get_int( 'report_id', 'post' );
 $id = ( $id == 0 ) ? $report_id : $id;
 
 $sql = 'SELECT title, alias FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . intval( $id );
-
 $result = $db->query( $sql );
 $row = $result->fetch();
 unset( $sql, $result );
 
-$row['error'] = '';
-$row['action'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $id, true );
-$row['id'] = $id;
-
-if( $id )
+if( !empty( $row ) )
 {
+	$row['error'] = '';
+	$row['action'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $id, true );
+	$row['id'] = $id;
+
 	$check = false;
 	if( $submit and $report_id )
 	{
@@ -54,15 +53,15 @@ if( $id )
 			$report_note = nv_nl2br( $report_note );
 
 			$sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_report SET
-				id=' . $report_id . ', 
-				type=' . $report . ', 
-				report_time=' . NV_CURRENTTIME . ', 
-				report_userid=0, 
-				report_ip=' . $db->quote( $client_info['ip'] ) . ', 
-				report_browse_key=' . $db->quote( $client_info['browser']['key'] ) . ', 
-				report_browse_name=' . $db->quote( $client_info['browser']['name'] ) . ', 
-				report_os_key=' . $db->quote( $client_info['client_os']['key'] ) . ', 
-				report_os_name=' . $db->quote( $client_info['client_os']['name'] ) . ', 
+				id=' . $report_id . ',
+				type=' . $report . ',
+				report_time=' . NV_CURRENTTIME . ',
+				report_userid=0,
+				report_ip=' . $db->quote( $client_info['ip'] ) . ',
+				report_browse_key=' . $db->quote( $client_info['browser']['key'] ) . ',
+				report_browse_name=' . $db->quote( $client_info['browser']['name'] ) . ',
+				report_os_key=' . $db->quote( $client_info['client_os']['key'] ) . ',
+				report_os_name=' . $db->quote( $client_info['client_os']['name'] ) . ',
 				report_note=' . $db->quote( $report_note );
 
 			$check = $db->query( $sql );
@@ -73,6 +72,5 @@ if( $id )
 }
 else
 {
-	die( "you don't permission to access!!!" );
-	exit();
+	trigger_error( "you don't permission to access!!!", 256 );
 }

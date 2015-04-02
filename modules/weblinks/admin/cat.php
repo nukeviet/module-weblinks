@@ -10,7 +10,6 @@
 
 if( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
- 
 $error = '';
 
 $catid = $nv_Request->get_int( 'catid', 'get', 0 );
@@ -23,7 +22,8 @@ $data_content = array(
 	'title' => '',
 	'alias' => '',
 	'description' => '',
-	'keywords' => '' );
+	'keywords' => ''
+);
 
 // Get array catid
 $querysubcat = $db->query( 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat ORDER BY parentid, weight ASC' );
@@ -65,16 +65,16 @@ if( ! empty( $savecat ) )
 			$weight = intval( $weight ) + 1;
 
 			$stmt = $db->prepare( 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET
-				parentid =' . intval( $data_content['parentid'] ) . ', 
-				weight =' . intval( $weight ) . ', 
-				inhome =1, 
-				numlinks =3, 
-				title =:title, 
-				catimage =:catimage, 
-				alias =:alias, 
-				description =:description, 
-				keywords =:keywords, 
-				add_time = ' . NV_CURRENTTIME . ', 
+				parentid =' . intval( $data_content['parentid'] ) . ',
+				weight =' . intval( $weight ) . ',
+				inhome =1,
+				numlinks =3,
+				title =:title,
+				catimage =:catimage,
+				alias =:alias,
+				description =:description,
+				keywords =:keywords,
+				add_time = ' . NV_CURRENTTIME . ',
 				edit_time =' . NV_CURRENTTIME );
 			$stmt->bindParam( ':title', $data_content['title'], PDO::PARAM_STR );
 			$stmt->bindParam( ':catimage', $data_content['catimage'], PDO::PARAM_STR );
@@ -109,21 +109,21 @@ if( ! empty( $savecat ) )
 			}
 			else
 			{
-				$stmt = $db->prepare( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET 
-					parentid=' . intval( $data_content['parentid'] ) . ', 
-					title=:title, 
-					catimage=:catimage, 
-					alias=:alias, 
-					description=:description, 
-					keywords=:keywords, 
-					edit_time=' . NV_CURRENTTIME . ' 
+				$stmt = $db->prepare( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET
+					parentid=' . intval( $data_content['parentid'] ) . ',
+					title=:title,
+					catimage=:catimage,
+					alias=:alias,
+					description=:description,
+					keywords=:keywords,
+					edit_time=' . NV_CURRENTTIME . '
 					WHERE catid =' . $data_content['catid'] );
 				$stmt->bindParam( ':title', $data_content['title'], PDO::PARAM_STR );
 				$stmt->bindParam( ':catimage', $data_content['catimage'], PDO::PARAM_STR );
 				$stmt->bindParam( ':alias', $data_content['alias'], PDO::PARAM_STR );
 				$stmt->bindParam( ':description', $data_content['description'], PDO::PARAM_STR );
 				$stmt->bindParam( ':keywords', $data_content['keywords'], PDO::PARAM_STR );
- 
+
 				if( $stmt->execute() )
 				{
 

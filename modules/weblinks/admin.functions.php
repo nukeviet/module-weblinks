@@ -21,7 +21,8 @@ $allow_func = array(
 	'multidel',
 	'checklink',
 	'brokenlink',
-	'delbroken' );
+	'delbroken'
+);
 
 define( 'NV_IS_FILE_ADMIN', true );
 

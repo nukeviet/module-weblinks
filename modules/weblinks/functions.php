@@ -34,13 +34,13 @@ $set_viewcat = '';
 $alias_cat_url = isset( $array_op[0] ) ? $array_op[0] : '';
 $array_mod_title = array();
 $global_array_cat = array();
- 
+
 // Xac dinh RSS
 if( $module_info['rss'] )
 {
 	$rss[] = array( 'title' => $module_info['custom_title'], 'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] );
 }
- 
+
 $sql = 'SELECT catid, parentid, title, description, catimage, alias, keywords  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE inhome=1 ORDER BY parentid, weight';
 $result = $db->query( $sql );
 
