@@ -17,7 +17,7 @@ $submit = $nv_Request->get_string( 'submit', 'post' );
 $error = 0;
 
 if( ! empty( $submit ) )
-{	
+{
 	$weblinks_config['sort'] = ( $nv_Request->get_string( 'sort', 'post' ) == 'asc' ) ? 'asc' : 'des';
 	$weblinks_config['sortoption'] =  nv_htmlspecialchars ( $nv_Request->get_string( 'sortoption', 'post', 'byid' ) );
 	$weblinks_config['showlinkimage'] = $nv_Request->get_int( 'showlinkimage', 'post', 0 );
@@ -28,16 +28,14 @@ if( ! empty( $submit ) )
 	$sth = $db->prepare( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_config SET name = :name WHERE name = :value');
 	foreach( $weblinks_config as $name => $value )
 	{
- 
 			$sth->bindParam( ':name', $name, PDO::PARAM_STR );
 			$sth->bindParam( ':value', $value, PDO::PARAM_STR );
 			$sth->execute();
- 
 	}
- 
+
 	$sth->closeCursor();
 }
- 
+
 // Set data adv
 $weblinks_config['asc'] = $weblinks_config['des'] = '';
 $weblinks_config['sort'] = ( $weblinks_config['sort'] == 'asc' ) ? $weblinks_config['asc'] = 'checked' : $weblinks_config['des'] = 'checked';

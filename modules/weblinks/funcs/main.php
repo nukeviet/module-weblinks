@@ -23,7 +23,7 @@ else  $orderby = 'rand() ';
 
 $array_cat_content = array();
 $urllink = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=';
- 
+
 foreach( $global_array_cat as $catid_i => $array_cat_i )
 {
 	$content = array();
@@ -56,7 +56,7 @@ foreach( $global_array_cat as $catid_i => $array_cat_i )
 	}
 	$array_cat_content[$catid_i] = $content;
 }
- 
+
 $contents = call_user_func( 'main_theme', $array_cat, $array_cat_content );
 
 include NV_ROOTDIR . '/includes/header.php';

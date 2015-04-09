@@ -26,11 +26,11 @@ $all_page = $db->query( 'SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_
 $sql = 'SELECT a.url, a.title, b.type, a.id FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows a INNER JOIN ' . NV_PREFIXLANG . '_' . $module_data . '_report b ON a.id=b.id LIMIT ' . $page . ', ' . $per_page;
 
 // GROUP BY a.url
- 
+
 if( $all_page > 0 )
 {
 	$xtpl->assign( 'FORM_ACTION', NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=delbroken' );
-	
+
 	$result = $db->query( $sql );
 	while( $row = $result->fetch() )
 	{
