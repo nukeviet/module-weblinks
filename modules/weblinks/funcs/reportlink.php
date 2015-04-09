@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.x
+ * @Project NUKEVIET 4.x
  * @author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2012 VINADES.,JSC. all rights reserved
- * @createdate 3-6-2010 0:14
+ * @Copyright (C) 2014 VINADES.,JSC. all rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate 3-6-2010 0:14
  */
 
 if( ! defined( 'NV_IS_MOD_WEBLINKS' ) ) die( 'Stop!!!' );
@@ -13,33 +14,31 @@ $submit = $nv_Request->get_string( 'submit', 'post' );
 $report_id = $nv_Request->get_int( 'report_id', 'post' );
 $id = ( $id == 0 ) ? $report_id : $id;
 
-$sql = "SELECT `title`, `alias` FROM `" . NV_PREFIXLANG . "_" . $module_data . "_rows` WHERE `id`='" . $id . "'";
-
-$result = $db->sql_query( $sql );
-$row = $db->sql_fetchrow( $result );
+$sql = 'SELECT title, alias FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . intval( $id );
+$result = $db->query( $sql );
+$row = $result->fetch();
 unset( $sql, $result );
 
-$row['error'] = "";
-$row['action'] = nv_url_rewrite( NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&amp;" . NV_NAME_VARIABLE . "=" . $module_name . "&amp;" . NV_OP_VARIABLE . "=reportlink-" . $row['alias'] . "-" . $id, true );
-$row['id'] = $id;
-
-if( $id )
+if( !empty( $row ) )
 {
+	$row['error'] = '';
+	$row['action'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $id, true );
+	$row['id'] = $id;
+
 	$check = false;
 	if( $submit and $report_id )
 	{
-		$sql = "SELECT `type` FROM `" . NV_PREFIXLANG . "_" . $module_data . "_report` WHERE `id`='" . $report_id . "'";
-		$result = $db->sql_query( $sql );
-		$rows = $db->sql_fetchrow( $result );
-		
+		$sql = 'SELECT type FROM ' . NV_PREFIXLANG . '_' . $module_data . '_report WHERE id=' . intval( $report_id );
+		$result = $db->query( $sql );
+		$rows = $result->fetch();
+
 		$report = $nv_Request->get_int( 'report', 'post' );
-		$report_note = filter_text_input( 'report_note', 'post', '', 1, 255 );
-		
+		$report_note = nv_substr( $nv_Request->get_title( 'report_note', 'post', '', 1 ), 0, 255 );
+
 		$row['report_note'] = $report_note;
 		if( $report == 0 and empty( $report_note ) )
 		{
 			$row['error'] = $lang_module['error'];
-
 		}
 		elseif( ! empty( $report_note ) and ! isset( $report_note{9} ) )
 		{
@@ -52,17 +51,26 @@ if( $id )
 		else
 		{
 			$report_note = nv_nl2br( $report_note );
-			$sql = "INSERT INTO `" . NV_PREFIXLANG . "_" . $module_data . "_report` (`id`, `type`, `report_time`, `report_userid`, `report_ip`, `report_browse_key`, `report_browse_name`, `report_os_key`, `report_os_name`, `report_note`) VALUE ('" . $report_id . "', '" . $report . "', UNIX_TIMESTAMP(), '0', " . $db->dbescape_string( $client_info['ip'] ) . ", " . $db->dbescape_string( $client_info['browser']['key'] ) . ", " . $db->dbescape_string( $client_info['browser']['name'] ) . ", " . $db->dbescape_string( $client_info['client_os']['key'] ) . ", " . $db->dbescape_string( $client_info['client_os']['name'] ) . ", " . $db->dbescape_string( $report_note ) . ")";
-			$check = $db->sql_query( $sql );
+
+			$sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_report SET
+				id=' . $report_id . ',
+				type=' . $report . ',
+				report_time=' . NV_CURRENTTIME . ',
+				report_userid=0,
+				report_ip=' . $db->quote( $client_info['ip'] ) . ',
+				report_browse_key=' . $db->quote( $client_info['browser']['key'] ) . ',
+				report_browse_name=' . $db->quote( $client_info['browser']['name'] ) . ',
+				report_os_key=' . $db->quote( $client_info['client_os']['key'] ) . ',
+				report_os_name=' . $db->quote( $client_info['client_os']['name'] ) . ',
+				report_note=' . $db->quote( $report_note );
+
+			$check = $db->query( $sql );
 		}
 	}
 
-	$contents = call_user_func( "report", $row, $check );
+	$contents = call_user_func( 'report', $row, $check );
 }
 else
 {
-	die( "you don't permission to access!!!" );
-	exit();
+	trigger_error( "you don't permission to access!!!", 256 );
 }
-
-?>

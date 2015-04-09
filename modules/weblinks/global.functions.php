@@ -1,17 +1,18 @@
 <?php
 
 /**
- * @Project NUKEVIET 3.x
+ * @Project NUKEVIET 4.x
  * @Author VINADES.,JSC (contact@vinades.vn)
- * @copyright 2009
- * @createdate 12/31/2009 0:51
+ * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @License GNU/GPL version 2 or any later version
+ * @Createdate 12/31/2009 0:51
  */
 
 if( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
 /**
  * _substr()
- * 
+ *
  * @param mixed $str
  * @param mixed $length
  * @param integer $minword
@@ -37,4 +38,12 @@ function _substr( $str, $length, $minword = 3 )
 	return $sub . ( ( isset( $str{$len} ) ) ? '...' : '' );
 }
 
-?>
+$weblinks_config = array();
+$sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_config';
+$list = nv_db_cache( $sql, '', $module_name );
+foreach( $list as $l )
+{
+
+	$weblinks_config[$l['name']] = $l['value'];
+}
+unset( $sql, $list );
