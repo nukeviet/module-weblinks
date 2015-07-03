@@ -69,6 +69,10 @@ if( !empty( $row ) )
 	}
 
 	$contents = call_user_func( 'report', $row, $check );
+	
+	include NV_ROOTDIR . '/includes/header.php';
+	echo nv_site_theme( $contents, 0 );
+	include NV_ROOTDIR . '/includes/footer.php';
 }
 else
 {

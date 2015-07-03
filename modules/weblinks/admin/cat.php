@@ -214,6 +214,11 @@ $xtpl->assign( 'CAPTION', $caption );
 $xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_name );
 $xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name . '/cat' );
 
+if( empty( $data_content['alias'] ) )
+{
+	$xtpl->parse( 'main.getalias' );
+}
+
 if( ! empty( $error ) )
 {
 	$xtpl->assign( 'error', $error );

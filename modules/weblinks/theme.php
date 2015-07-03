@@ -234,5 +234,5 @@ function report( $row, $check )
 	}
 
 	$xtpl->parse( 'main' );
-	return $xtpl->out( 'main' );
+	return $xtpl->text( 'main' );
 }

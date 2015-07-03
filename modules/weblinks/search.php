@@ -14,7 +14,7 @@ $db->sqlreset()->select( 'COUNT(*)' )->from( NV_PREFIXLANG . '_' . $m_values['mo
 
 $num_items = $db->query( $db->sql() )->fetchColumn();
 
-$db->select( 'id, catid, title, alias, description' )->limit( $limit )->offset( ( $pages - 1 ) * $limit );
+$db->select( 'id, catid, title, alias, description' )->limit( $limit )->offset( ( $page - 1 ) * $limit );
 $result = $db->query( $db->sql() );
 
 if( $num_items )

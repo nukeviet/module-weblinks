@@ -70,14 +70,14 @@ if( $nv_Request->get_int( 'save', 'post,get', 0 ) )
 	$data['alias'] = $nv_Request->get_title( 'alias', 'post', '', 1 );
 	$data['alias'] = ( $data['alias'] == '' ) ? change_alias( $data['title'] ) : change_alias( $data['alias'] );
 	$data['url'] = $nv_Request->get_title( 'url', 'post', '' );
-	$data['image'] = $nv_Request->get_title( 'image', 'post', '' );
+	$data['urlimg'] = $nv_Request->get_title( 'urlimg', 'post', '' );
 
-	if( ! nv_is_url( $data['image'] ) and file_exists( NV_DOCUMENT_ROOT . $data['image'] ) )
+	if( ! nv_is_url( $data['urlimg'] ) and file_exists( NV_DOCUMENT_ROOT . $data['urlimg'] ) )
 	{
 		$lu = strlen( NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' );
-		if( substr( $data['image'], 0, $lu ) == NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' )
+		if( substr( $data['urlimg'], 0, $lu ) == NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' )
 		{
-			$data['image'] = substr( $data['image'], $lu );
+			$data['urlimg'] = substr( $data['urlimg'], $lu );
 		}
 	}
 
@@ -123,7 +123,7 @@ if( $nv_Request->get_int( 'save', 'post,get', 0 ) )
 			$stmt->bindParam( ':title',  $data['title'], PDO::PARAM_STR );
 			$stmt->bindParam( ':alias',  $data['alias'], PDO::PARAM_STR );
 			$stmt->bindParam( ':url',  $data['url'], PDO::PARAM_STR );
-			$stmt->bindParam( ':urlimg',  $data['image'], PDO::PARAM_STR );
+			$stmt->bindParam( ':urlimg',  $data['urlimg'], PDO::PARAM_STR );
 			$stmt->bindParam( ':description',  $data['description'], PDO::PARAM_STR, strlen( $data['description'] ) );
 
 			if( $stmt->execute() )
@@ -157,7 +157,7 @@ if( $nv_Request->get_int( 'save', 'post,get', 0 ) )
 			$stmt->bindParam( ':title', $data['title'], PDO::PARAM_STR );
 			$stmt->bindParam( ':alias', $data['alias'], PDO::PARAM_STR );
 			$stmt->bindParam( ':url', $data['url'], PDO::PARAM_STR );
-			$stmt->bindParam( ':urlimg', $data['image'], PDO::PARAM_STR );
+			$stmt->bindParam( ':urlimg', $data['urlimg'], PDO::PARAM_STR );
 			$stmt->bindParam( ':note', $data['note'], PDO::PARAM_STR );
 			$stmt->bindParam( ':description', $data['description'], PDO::PARAM_STR, strlen( $data['description'] ) );
 			if( $stmt->execute() )
@@ -230,6 +230,11 @@ if( ! empty( $array_cat ) )
 
 $xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_name );
 $xtpl->assign( 'DATA', $data );
+
+if( empty( $data['alias'] ) )
+{
+	$xtpl->parse( 'main.getalias' );
+}
 
 if( ! empty( $error ) )
 {

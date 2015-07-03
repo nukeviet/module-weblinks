@@ -43,21 +43,22 @@
 				<input type="hidden" name ="parentid_old" value="{DATA.parentid}" />
 				<input name="savecat" type="hidden" value="1" />
 				<div class="form-group">
-					<label class="col-sm-4 control-label" for="input-title">{LANG.name}</label>
+					<label class="col-sm-4 control-label" for="idtitle">{LANG.name}</label>
 					<div class="col-sm-20">
-						<input type="text" name="title" value="{DATA.title}" placeholder="{LANG.name}" id="input-title" class="form-control" maxlength="255" />
+						<input type="text" name="title" value="{DATA.title}" placeholder="{LANG.name}" id="idtitle" class="form-control w500" maxlength="255" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 control-label" for="input-alias">{LANG.alias}</label>
+					<label class="col-sm-4 control-label" for="idalias">{LANG.alias}</label>
 					<div class="col-sm-20">
-						<input type="text" name="alias" value="{DATA.alias}" placeholder="{LANG.alias}" id="input-alias" class="form-control" maxlength="255" />
+						<input type="text" name="alias" value="{DATA.alias}" placeholder="{LANG.alias}" id="idalias" class="form-control w500" maxlength="255" style="display:inline-block"/>
+						 &nbsp;<em class="fa fa-refresh fa-lg fa-pointer text-middle" onclick="get_alias();">&nbsp;</em>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label" for="input-alias">{LANG.cat_sub}</label>
 					<div class="col-sm-20">
-						<select class="form-control" name="parentid">
+						<select class="form-control w500" name="parentid">
 							<option value="0">{LANG.weblink_parent}</option>
 							<!-- BEGIN: loopcat -->
 							<option value="{CAT.catid}" {CAT.sl}>{CAT.xtitle}</option>
@@ -68,8 +69,8 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label" for="input-alias">{LANG.weblink_fileimage}</label>
 					<div class="col-sm-20">
-						<input class="form-control fixinline" type="text" name="catimage" id="catimage" value="{DATA.catimage}"/>
-						<input type="button" value="Browse server" name="selectimg" class="btn btn-info">
+						<input class="form-control w500" type="text" name="catimage" id="catimage" value="{DATA.catimage}" style="display:inline-block"/>
+						<input type="button" value="Browse server" name="selectimg" class="btn btn-info fixinline" style="margin-top:-3px">
 					</div>
 				</div>
 				<div class="form-group">
@@ -104,4 +105,11 @@ $("input[name=selectimg]").click(function() {
 });
 //]]>
 </script>
+<!-- BEGIN: getalias -->
+<script type="text/javascript">
+	$("#idtitle").change(function() {
+		get_alias();
+	});
+</script>
+<!-- END: getalias -->
 <!-- END: main -->

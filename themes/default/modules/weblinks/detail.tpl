@@ -1,6 +1,9 @@
 <!-- BEGIN: main -->
 <div id="weblink">
 	<h2>{DETAIL.title}</h2>
+	<div class="pull-right">
+		<em class="fa fa-location-arrow">&nbsp;</em><a title="{LANG.report}" href="javascript:void(0);" onclick="window.open('{DETAIL.report}','','menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=600,height=400');return false">{LANG.report}</a>
+	</div>
 	<div class="thumb_imgweb">
 		<p>
 			<!-- BEGIN: img -->
@@ -16,16 +19,6 @@
 			{LANG.edit_time}: {DETAIL.edit_time}
 		</p>
 		<div class="clear"></div>
-	</div>
-	<div class="wl fl">
-		<div class="padding">
-			{LANG.report}:
-		</div>
-	</div>
-	<div class="wr fr">
-		<div class="padding">
-			<a title="{LANG.report}" href="javascript:void(0);" onclick="NewWindow('{DETAIL.report}','','400','250','no');return false">Click here</a>
-		</div>
 	</div>
 	<div class="clear"></div>
 	<!-- BEGIN: des -->

@@ -13,11 +13,14 @@
 				<tbody>
 					<tr>
 						<td class="w150">{LANG.weblink_add_title} : </td>
-						<td><input class="form-control" type="text" name="title" value="{DATA.title}"/></td>
+						<td><input class="form-control w500" type="text" name="title" value="{DATA.title}" id="idtitle"/></td>
 					</tr>
 					<tr>
 						<td>{LANG.alias} : </td>
-						<td><input class="form-control" name="alias" type="text" value="{DATA.alias}" maxlength="255" /></td>
+						<td>
+							<input id="idalias" class="form-control w500" name="alias" type="text" value="{DATA.alias}" maxlength="255" style="display:inline-block"/>
+							&nbsp;<em class="fa fa-refresh fa-lg fa-pointer text-middle" onclick="get_alias();">&nbsp;</em>
+						</td>
 					</tr>
 					<tr>
 						<td>{LANG.weblink_add_url} : </td>
@@ -38,7 +41,7 @@
 							
 							<div class="form-group">
 								<div class="col-sm-10">
-									<input class="form-control" type="text" name="image" id="image" value="{DATA.urlimg}"/>
+									<input class="form-control" type="text" name="urlimg" id="urlimg" value="{DATA.urlimg}"/>
 								</div>
 								<div class="col-sm-4">
 									<input type="button" value="Browse server" name="selectimg" class="btn btn-info">
@@ -68,7 +71,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$("input[name=selectimg]").click(function() {
-		var area = "image";
+		var area = "urlimg";
 		var path = "{PATH}";
 		var type = "image";
 		nv_open_browse(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + area + "&path=" + path + "&type=" + type, "NVImg", 850, 420, "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
@@ -76,4 +79,11 @@
 	});
 	
 </script>
+<!-- BEGIN: getalias -->
+<script type="text/javascript">
+	$("#idtitle").change(function() {
+		get_alias();
+	});
+</script>
+<!-- END: getalias -->
 <!-- END: main -->

@@ -50,11 +50,12 @@ $db->sqlreset()
 	->where( 'status=1 AND catid=' . intval( $catid ) );
 	
 $num_items = $db->query( $db->sql() )->fetchColumn();
- 
+
 $db->select( 'id, author, title, alias, url, urlimg, add_time, description, hits_total' )
 	->order( $orderby . $sort )
 	->limit( $per_page )
 	->offset( ( $page - 1 ) * $per_page );
+	
 $result = $db->query( $db->sql() );
 
 while( $row = $result->fetch() )
@@ -63,7 +64,7 @@ while( $row = $result->fetch() )
 
 	if( $author[0] == 1 )
 	{
-		$sql1 = 'SELECT * FROM ' . NV_AUTHORS_GLOBALTABLE . ' WHERE id=' . $author[1] . '';
+		$sql1 = 'SELECT * FROM ' . NV_AUTHORS_GLOBALTABLE . ' WHERE admin_id=' . $author[1] . '';
 		$result1 = $db->query( $sql1 );
 		$row1 = $result1->fetch();
 		$row['author'] = $row1;
