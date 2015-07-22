@@ -175,7 +175,7 @@ $xtpl->assign( 'NV_NAME_VARIABLE', NV_NAME_VARIABLE );
 $xtpl->assign( 'MODULE_NAME', $module_name );
 $xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );
 $xtpl->assign( 'OP', $op );
-$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_name );
+$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_upload );
 $xtpl->assign( 'catid', $data_content['catid'] );
 
 // get catid
@@ -211,8 +211,8 @@ if( ! empty( $array_cat ) )
 
 $xtpl->assign( 'DATA', $data_content );
 $xtpl->assign( 'CAPTION', $caption );
-$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_name );
-$xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_name . '/cat' );
+$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_upload );
+$xtpl->assign( 'UPLOAD_CURRENT', NV_UPLOADS_DIR . '/' . $module_upload . '/cat' );
 
 if( empty( $data_content['alias'] ) )
 {
