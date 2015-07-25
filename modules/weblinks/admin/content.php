@@ -228,7 +228,7 @@ if( ! empty( $array_cat ) )
 	}
 }
 
-$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_name );
+$xtpl->assign( 'PATH', NV_UPLOADS_DIR . '/' . $module_upload );
 $xtpl->assign( 'DATA', $data );
 
 if( empty( $data['alias'] ) )

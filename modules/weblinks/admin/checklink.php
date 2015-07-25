@@ -24,7 +24,6 @@ $xtpl->assign( 'LANG', $lang_module );
 
 if( $nv_Request->isset_request( 'ok', 'cookie' ) )
 {
-	require_once NV_ROOTDIR . '/includes/class/checkurl.class.php';
 	$check = new CheckUrl();
 
 	$page_title = $lang_module['weblink_checkalivelink'];
