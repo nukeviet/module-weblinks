@@ -55,7 +55,7 @@ function main_theme( $array_cat, $array_cat_content )
 					{
 						if( $content['urlimg'] != '' )
 						{
-							$urlimg = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $content['urlimg'];
+							$urlimg = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $content['urlimg'];
 						}
 						else
 						{
@@ -140,7 +140,7 @@ function viewcat( $array_subcat, $array_cat, $items )
 			$items_i['description'] = _substr( $items_i['description'], 200 );
 			if( ! empty( $items_i['urlimg'] ) )
 			{
-				$urlimg = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $items_i['urlimg'];
+				$urlimg = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $items_i['urlimg'];
 			}
 			else
 			{

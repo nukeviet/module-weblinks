@@ -26,7 +26,7 @@ $row['report'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIAB
 
 if( ! empty( $row['urlimg'] ) )
 {
-	$row['urlimg'] = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $row['urlimg'];
+	$row['urlimg'] = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $row['urlimg'];
 }
 else
 {
