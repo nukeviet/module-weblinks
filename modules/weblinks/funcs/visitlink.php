@@ -14,8 +14,8 @@ global $timeout;
 
 $id = 0;
 $temp = explode( '-', $array_op[0] );
-$id = intval( end( $temp ) );
-$sql = 'SELECT url FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE alias=' . intval( $id ) . ' LIMIT 0,1';
+$id =  end( $temp ) ;
+$sql = 'SELECT url FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . intval( $id ) . ' LIMIT 0,1';
 $result = $db->query( $sql );
 $row = $result->fetch();
 
