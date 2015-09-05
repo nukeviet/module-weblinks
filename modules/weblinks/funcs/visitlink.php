@@ -13,10 +13,8 @@ if( ! defined( 'NV_IS_MOD_WEBLINKS' ) ) die( 'Stop!!!' );
 global $timeout;
 
 $id = 0;
-if( preg_match( "/^(.*?)\-([0-9]+)$/", $array_op[0] ) )
-{
-	$id = intval( $m[2] );
-}
+$temp = explode( '-', $array_op[0] );
+$id = intval( end( $temp ) );
 $sql = 'SELECT url FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE alias=' . intval( $id ) . ' LIMIT 0,1';
 $result = $db->query( $sql );
 $row = $result->fetch();
