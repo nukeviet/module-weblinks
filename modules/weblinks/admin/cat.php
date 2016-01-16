@@ -85,7 +85,7 @@ if( ! empty( $savecat ) )
 			if( $idnew = $db->lastInsertId() )
 			{
 				nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['add_cat'], $data_content['title'], $admin_info['userid'] );
-				nv_del_moduleCache( $module_name );
+				$nv_Cache->delMod( $module_name );
 				Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&pid=' . $data_content['parentid'] );
 				die();
 			}
@@ -137,7 +137,7 @@ if( ! empty( $savecat ) )
 						nv_fix_cat( $data_content['parentid_old'] );
 					}
 
-					nv_del_moduleCache( $module_name );
+					$nv_Cache->delMod( $module_name );
 					nv_insert_logs( NV_LANG_DATA, $module_name, $lang_module['edit_cat'], $data_content['title'], $admin_info['userid'] );
 
 					Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&pid=' . $data_content['parentid'] );

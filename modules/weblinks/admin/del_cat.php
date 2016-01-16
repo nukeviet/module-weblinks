@@ -35,7 +35,7 @@ if( $catid > 0 )
 		if( $db->query( $query ) )
 		{
 			nv_fix_cat( $parentid );
-			nv_del_moduleCache( $module_name );
+			$nv_Cache->delMod( $module_name );
 			$contents = 'OK_' . $catid;
 		}
 	}

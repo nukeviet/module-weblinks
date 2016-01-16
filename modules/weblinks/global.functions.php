@@ -40,7 +40,7 @@ function _substr( $str, $length, $minword = 3 )
 
 $weblinks_config = array();
 $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_config';
-$list = nv_db_cache( $sql, '', $module_name );
+$list = $nv_Cache->db( $sql, '', $module_name );
 foreach( $list as $l )
 {
 
