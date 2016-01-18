@@ -8,38 +8,35 @@
  * @Createdate 3-6-2010 0:14
  */
 
-if( ! defined( 'NV_IS_MOD_WEBLINKS' ) ) die( 'Stop!!!' );
+if (! defined('NV_IS_MOD_WEBLINKS')) {
+    die('Stop!!!');
+}
 
 global $timeout;
 
 $id = 0;
-$temp = explode( '-', $array_op[0] );
-$id =  end( $temp ) ;
-$sql = 'SELECT url FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . intval( $id ) . ' LIMIT 0,1';
-$result = $db->query( $sql );
+$temp = explode('-', $array_op[0]);
+$id =  end($temp) ;
+$sql = 'SELECT url FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . intval($id) . ' LIMIT 0,1';
+$result = $db->query($sql);
 $row = $result->fetch();
 
-if( $row['url'] != '' )
-{
-	if( ! preg_match( '/http:\/\//i', $row['url'] ) )
-	{
-		$url = 'http://' . $url;
-	}
+if ($row['url'] != '') {
+    if (! preg_match('/http:\/\//i', $row['url'])) {
+        $url = 'http://' . $url;
+    }
 
-	if( isset( $_COOKIE['timeout'] ) and $_COOKIE['timeout'] == $id )
-	{
-		$contents .= sprintf( $lang_module['notimeout'], $timeout );
-	}
-	else
-	{
-		setcookie( 'timeout', $id, time() + $timeout * 60 );
-		$db->query( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET hits_total=hits_total+1 WHERE id=' . intval( $id ) );
-	}
+    if (isset($_COOKIE['timeout']) and $_COOKIE['timeout'] == $id) {
+        $contents .= sprintf($lang_module['notimeout'], $timeout);
+    } else {
+        setcookie('timeout', $id, time() + $timeout * 60);
+        $db->query('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET hits_total=hits_total+1 WHERE id=' . intval($id));
+    }
 
-	Header( 'Location: ' . $row['url'] );
-	exit();
+    Header('Location: ' . $row['url']);
+    exit();
 }
 
 include NV_ROOTDIR . '/includes/header.php';
-echo nv_site_theme( $contents );
+echo nv_site_theme($contents);
 include NV_ROOTDIR . '/includes/footer.php';

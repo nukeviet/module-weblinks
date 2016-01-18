@@ -2,6 +2,7 @@
 /.settings
 /.project
 /.htaccess
+/.buildpath
 /.gitattributes
 /composer.json
 /config.php
