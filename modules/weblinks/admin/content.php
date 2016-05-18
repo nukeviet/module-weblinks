@@ -178,6 +178,11 @@ while ($row = $querysubcat->fetch()) {
     $array_cat[$row['catid']] = $row;
 }
 
+if (empty($array_cat)) {
+    Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=cat');
+    exit();
+}
+
 $data['description'] = htmlspecialchars(nv_editor_br2nl($data['description']));
 
 $xtpl = new XTemplate('content.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
