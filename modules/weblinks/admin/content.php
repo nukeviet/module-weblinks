@@ -88,7 +88,7 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
 
     $data['status'] = ($nv_Request->get_int('status', 'post') == 1) ? 1 : 0;
     // check url
-    if (empty($data['url']) || ! nv_is_url($data['url']) || ! check_url($data['id'], $data['url']) || ! nv_check_url($data['url'])) {
+    if (empty($data['url']) || ! nv_is_url($data['url']) || ! check_url($data['id'], $data['url'])) {
         $error[] = $lang_module['error_url'];
     }
     if (empty($data['title'])) {
