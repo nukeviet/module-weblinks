@@ -33,8 +33,10 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<td>
+							<!-- BEGIN: no_rewrite -->
 							<input type="hidden" name="report_id" value="{ROW.id}" />
 							<input type="hidden" name="link" value="{ROW.link}" />
+							<!-- END: no_rewrite -->
 							<input class="btn btn-primary" type="submit" name="submit" value="{LANG.report_confirm}"/>
 						</td>
 					</tr>
