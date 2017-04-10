@@ -189,6 +189,13 @@ function report($row, $check)
 
     $xtpl = new XTemplate('report.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
+	
+	if (!$global_config['rewrite_enable']) {
+	    $data['action'] = NV_BASE_SITEURL . 'index.php';
+	} else {
+	    $data['action'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=seek', true);
+	}
+	
     $xtpl->assign('ROW', $row);
     $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
 
@@ -200,6 +207,10 @@ function report($row, $check)
         $xtpl->parse('main.close');
         $xtpl->parse('main.success');
     }
+	
+	if (!$global_config['rewrite_enable']) {
+	    $xtpl->parse('main.no_rewrite');
+	}
 
     $xtpl->parse('main');
     return $xtpl->text('main');
