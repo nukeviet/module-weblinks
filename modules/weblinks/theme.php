@@ -21,7 +21,7 @@ if (! defined('NV_IS_MOD_WEBLINKS')) {
  */
 function main_theme($array_cat, $array_cat_content)
 {
-    global $module_info, $module_file, $lang_module, $weblinks_config;
+    global $module_info, $lang_module, $weblinks_config;
 
     $xtpl = new XTemplate('main_page.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('BASE_URL', NV_BASE_SITEURL);
@@ -87,7 +87,7 @@ function main_theme($array_cat, $array_cat_content)
  */
 function viewcat($array_subcat, $array_cat, $items)
 {
-    global $module_info, $module_file, $lang_module, $weblinks_config;
+    global $module_info, $lang_module, $weblinks_config;
 
     $xtpl = new XTemplate('viewcat.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
@@ -149,7 +149,7 @@ function viewcat($array_subcat, $array_cat, $items)
  */
 function detail($row)
 {
-    global $module_info, $module_file, $lang_module, $weblinks_config;
+    global $module_info, $lang_module, $weblinks_config;
 
     $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $row['add_time'] = nv_date('H:i l - d/m/Y', $row['add_time']);
@@ -185,7 +185,7 @@ function detail($row)
  */
 function report($row, $check)
 {
-    global $module_info, $lang_module, $module_file;
+    global $module_info, $lang_module;
 
     $xtpl = new XTemplate('report.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
