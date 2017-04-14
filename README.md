@@ -1,8 +1,8 @@
 # Hướng dẫn cập nhật module weblinks từ 4.1.00 lên 4.1.01
 
 Chú ý: 
-- Gói cập nhật này chỉ dành cho module weblinks 4.1.00, nếu module của bạn không ở phiên bản này cần tìm các hướng dẫn cập nhật lên 4.1.00 trước.
-- Module weblinks 4.1.00 hoạt động tốt trên NukeViet 4 RC3, NukeViet 4 Official và NukeViet 4.1 Beta 2
+- Gói cập nhật này chỉ dành cho module weblinks 4.1.01, nếu module của bạn không ở phiên bản này cần tìm các hướng dẫn cập nhật lên 4.1.00 trước.
+- Module weblinks 4.1.01 hoạt động tốt trên NukeViet 4.1 Beta 2
 
 ## Chuẩn bị cập nhật
 
