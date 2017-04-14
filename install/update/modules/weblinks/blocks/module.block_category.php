@@ -3,9 +3,9 @@
 /**
  * @Project NUKEVIET 4.x
  * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
+ * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate 2-9-2010 14:43
+ * @Createdate 10 April 2017 17:00
  */
 
 if (! defined('NV_IS_MOD_WEBLINKS')) {
@@ -23,7 +23,7 @@ if (! nv_function_exists('nv_weblink_category')) {
     {
         global $global_array_cat, $module_file, $module_info;
 
-        $xtpl = new XTemplate('block_category.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+        $xtpl = new XTemplate('block_category.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
         $xtpl->assign('TEMPLATE', $module_info['template']);
         $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
         $xtpl->assign('BLOCK_ID', 'web' . rand(1, 1000));
