@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_ADMIN') or ! defined('NV_MAINFILE')) {
+if (!defined('NV_ADMIN') or !defined('NV_MAINFILE')) {
     die('Stop!!!');
 }
 
@@ -17,9 +17,9 @@ $module_version = array(
     'modfuncs' => 'main,viewcat,detail',
     'is_sysmod' => 0,
     'virtual' => 1,
-    'version' => '4.1.01',
-    'date' => 'Mon, 10 April 2017 17:00:00 GMT',
+    'version' => '4.1.02',
+    'date' => 'Tue, 25 Apr 2017 02:00:51 GMT',
     'author' => 'VINADES (contact@vinades.vn)',
     'note' => '',
-    'uploads_dir' => array( $module_name, $module_name . '/cat' )
+    'uploads_dir' => array($module_name, $module_name . '/cat')
 );
