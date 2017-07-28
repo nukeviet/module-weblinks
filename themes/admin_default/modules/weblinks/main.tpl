@@ -3,22 +3,19 @@
 	<form class="form-inline" name="listlink" method="post" action="{FORM_ACTION}">
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover">
-				<caption>{LANG.weblink_link_recent}</caption>
 				<thead>
 					<tr>
-						<th class="text-center"><input name="check_all[]" type="checkbox" value="yes" onclick="nv_checkAll(this.form, 'idcheck[]', 'check_all[]',this.checked);" /></th>
-						<th class="text-center">{LANG.weblink_add_title}</th>
-						<th class="text-center">{LANG.weblink_add_url}</th>
-						<th class="text-center">{LANG.weblink_add_click}</th>
-						<th class="text-center">{LANG.weblink_inhome}</th>
-						<th class="text-center">{LANG.weblink_method}</th>
+						<th class="text-center w50"><input name="check_all[]" type="checkbox" value="yes" onclick="nv_checkAll(this.form, 'idcheck[]', 'check_all[]',this.checked);" /></th>
+						<th>{LANG.weblink_add_title}</th>
+						<th>{LANG.weblink_add_url}</th>
+						<th class="text-center w100">{LANG.weblink_add_click}</th>
+						<th class="text-center w100">{LANG.weblink_inhome}</th>
+						<th class="text-center w150">{LANG.weblink_method}</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<td colspan="6">
-							<input type="button" class="btn btn-primary" onclick="nv_del_select_rows(this.form, '{LANG.msgnocheck}')" value="{LANG.weblink_method_del}" /> 
-						</td>
+						<td colspan="6"><input type="button" class="btn btn-primary" onclick="nv_del_select_rows(this.form, '{LANG.msgnocheck}')" value="{LANG.weblink_method_del}" /></td>
 					</tr>
 				</tfoot>
 				<tbody>
@@ -30,10 +27,8 @@
 						<td class="text-center">{ROW.hits_total}</td>
 						<td class="text-center">{ROW.status}</td>
 						<td class="text-center">
-							<em class="fa fa-edit fa-lg">&nbsp;</em>
-							<a class="edit_icon" href="{ROW.url_edit}">{LANG.weblink_method_edit}</a>&nbsp;-&nbsp;
-							<em class="fa fa-trash-o fa-lg">&nbsp;</em>
-							<a href="javascript:void(0);" onclick="nv_del_rows('{ROW.id}')" >{LANG.weblink_method_del}</a>
+							<em class="fa fa-edit fa-lg">&nbsp;</em><a href="{ROW.url_edit}">{LANG.weblink_method_edit}</a> - 
+							<em class="fa fa-trash-o fa-lg">&nbsp;</em><a href="javascript:void(0);" onclick="nv_del_rows('{ROW.id}')">{LANG.weblink_method_del}</a>
 						</td>
 					</tr>
 					<!-- END: loop -->
@@ -43,8 +38,6 @@
 	</form>
 </div>
 <!-- BEGIN: generate_page -->
-<div class="text-center">
-	{GENERATE_PAGE}
-</div>
+<div class="text-center">{GENERATE_PAGE}</div>
 <!-- END: generate_page -->
 <!-- END: main -->
