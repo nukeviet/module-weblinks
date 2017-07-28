@@ -8,13 +8,13 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_SYSTEM')) {
+if (!defined('NV_SYSTEM')) {
     die('Stop!!!');
 }
 
 define('NV_IS_MOD_WEBLINKS', true);
 
-require_once(NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php');
+require_once (NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php');
 
 /**
  * adminlink()
@@ -39,20 +39,23 @@ $global_array_cat = array();
 
 // Xac dinh RSS
 if ($module_info['rss']) {
-    $rss[] = array( 'title' => $module_info['custom_title'], 'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] );
+    $rss[] = array(
+        'title' => $module_info['custom_title'],
+        'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss']
+    );
 }
 
 $sql = 'SELECT catid, parentid, title, description, catimage, alias, keywords  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE inhome=1 ORDER BY parentid, weight';
 $result = $db->query($sql);
 
-while (list($catid_i, $parentid_i, $title_i, $description_i, $catimage_i, $alias_i, $keywords_i) = $result->fetch(3)) {
+while (list ($catid_i, $parentid_i, $title_i, $description_i, $catimage_i, $alias_i, $keywords_i) = $result->fetch(3)) {
     $link_i = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $alias_i;
-
-    $sql1 = 'SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid = '. $catid_i;
+    
+    $sql1 = 'SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid = ' . $catid_i;
     $result1 = $db->query($sql1);
-
+    
     $count_link = $result1->fetchColumn();
-
+    
     $global_array_cat[$catid_i] = array(
         'catid' => $catid_i,
         'parentid' => $parentid_i,
@@ -62,16 +65,20 @@ while (list($catid_i, $parentid_i, $title_i, $description_i, $catimage_i, $alias
         'description' => $description_i,
         'keywords' => $keywords_i,
         'catimage' => $catimage_i,
-        'count_link' => $count_link );
-
+        'count_link' => $count_link
+    );
+    
     if ($alias_cat_url == $alias_i) {
         $catid = $catid_i;
         $parentid = $parentid_i;
     }
-
+    
     //Xac dinh RSS
     if ($module_info['rss']) {
-        $rss[] = array( 'title' => $module_info['custom_title'] . ' - ' . $title_i, 'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] . '/' . $alias_i );
+        $rss[] = array(
+            'title' => $module_info['custom_title'] . ' - ' . $title_i,
+            'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] . '/' . $alias_i
+        );
     }
 }
 unset($sql, $result);
@@ -80,7 +87,7 @@ $count_op = sizeof($array_op);
 $per_page = $weblinks_config['per_page'];
 $page = 1;
 
-if (! empty($array_op)) {
+if (!empty($array_op)) {
     if ($catid == 0) {
         if (substr($array_op[0], 0, 10) == 'visitlink-') {
             $op = 'visitlink';
@@ -110,7 +117,8 @@ if (! empty($array_op)) {
             $array_mod_title[] = array(
                 'catid' => $parentid,
                 'title' => $array_cat_i['title'],
-                'link' => $array_cat_i['link'] );
+                'link' => $array_cat_i['link']
+            );
             $parentid = $array_cat_i['parentid'];
         }
         sort($array_mod_title, SORT_NUMERIC);

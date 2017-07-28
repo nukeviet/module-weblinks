@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_FILE_ADMIN')) {
+if (!defined('NV_IS_FILE_ADMIN')) {
     die('Stop!!!');
 }
 
@@ -56,9 +56,9 @@ $error = array();
 $data['id'] = $nv_Request->get_int('id', 'get', 0);
 if ($data['id'] > 0) {
     $sql = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $data['id']);
-
+    
     $data = $sql->fetch();
-
+    
     $page_title = $lang_module['weblink_edit_link'];
 }
 
@@ -70,25 +70,25 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
     $data['alias'] = ($data['alias'] == '') ? change_alias($data['title']) : change_alias($data['alias']);
     $data['url'] = $nv_Request->get_title('url', 'post', '');
     $data['urlimg'] = $nv_Request->get_title('urlimg', 'post', '');
-
-    if (! nv_is_url($data['urlimg']) and file_exists(NV_DOCUMENT_ROOT . $data['urlimg'])) {
+    
+    if (!nv_is_url($data['urlimg']) and file_exists(NV_DOCUMENT_ROOT . $data['urlimg'])) {
         $lu = strlen(NV_BASE_SITEURL . NV_UPLOADS_DIR . '/');
         if (substr($data['urlimg'], 0, $lu) == NV_BASE_SITEURL . NV_UPLOADS_DIR . '/') {
             $data['urlimg'] = substr($data['urlimg'], $lu);
         }
     }
-
-    if (! empty($data['url'])) {
-        if (! preg_match('#^(http|https|ftp|gopher)\:\/\/#', $data['url'])) {
+    
+    if (!empty($data['url'])) {
+        if (!preg_match('#^(http|https|ftp|gopher)\:\/\/#', $data['url'])) {
             $data['url'] = 'http://' . $data['url'];
         }
     }
-
+    
     $data['description'] = $nv_Request->get_editor('description', '', NV_ALLOWED_HTML_TAGS);
-
+    
     $data['status'] = ($nv_Request->get_int('status', 'post') == 1) ? 1 : 0;
     // check url
-    if (empty($data['url']) || ! nv_is_url($data['url']) || ! check_url($data['id'], $data['url'])) {
+    if (empty($data['url']) || !nv_is_url($data['url']) || !check_url($data['id'], $data['url'])) {
         $error[] = $lang_module['error_url'];
     }
     if (empty($data['title'])) {
@@ -97,7 +97,7 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
     if (strip_tags($data['description']) == '') {
         $error[] = $lang_module['error_description'];
     }
-
+    
     if (empty($error)) {
         if ($data['id'] > 0) {
             $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET
@@ -110,12 +110,12 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
 				edit_time = ' . NV_CURRENTTIME . ',
 				status=' . intval($data['status']) . '
 				WHERE id =' . intval($data['id']));
-            $stmt->bindParam(':title',  $data['title'], PDO::PARAM_STR);
-            $stmt->bindParam(':alias',  $data['alias'], PDO::PARAM_STR);
-            $stmt->bindParam(':url',  $data['url'], PDO::PARAM_STR);
-            $stmt->bindParam(':urlimg',  $data['urlimg'], PDO::PARAM_STR);
-            $stmt->bindParam(':description',  $data['description'], PDO::PARAM_STR, strlen($data['description']));
-
+            $stmt->bindParam(':title', $data['title'], PDO::PARAM_STR);
+            $stmt->bindParam(':alias', $data['alias'], PDO::PARAM_STR);
+            $stmt->bindParam(':url', $data['url'], PDO::PARAM_STR);
+            $stmt->bindParam(':urlimg', $data['urlimg'], PDO::PARAM_STR);
+            $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR, strlen($data['description']));
+            
             if ($stmt->execute()) {
                 nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['weblink_edit_link'], $data['title'], $admin_info['userid']);
                 Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
@@ -146,7 +146,7 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
             $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR, strlen($data['description']));
             if ($stmt->execute()) {
                 nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['weblink_add_link'], $data['title'], $admin_info['userid']);
-
+                
                 Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
                 die();
             } else {
@@ -156,13 +156,11 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
     }
 }
 
-
-
 // dung de lay data tu CSDL
 $data['description'] = (defined('NV_EDITOR')) ? nv_editor_br2nl($data['description']) : nv_br2nl($data['description']);
 $data['description'] = nv_htmlspecialchars($data['description']);
 
-if (! empty($data['urlimg']) and ! nv_is_url($data['urlimg'])) {
+if (!empty($data['urlimg']) and !nv_is_url($data['urlimg'])) {
     $data['urlimg'] = NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' . $data['urlimg'];
 }
 
@@ -195,7 +193,7 @@ $xtpl->assign('NV_OP_VARIABLE', NV_OP_VARIABLE);
 $xtpl->assign('OP', $op);
 $xtpl->assign('DESCRIPTION', $edits);
 
-if (! empty($array_cat)) {
+if (!empty($array_cat)) {
     foreach ($array_cat as $cat) {
         $xtitle = '';
         if ($cat['parentid'] != 0) {
@@ -215,7 +213,7 @@ if (empty($data['alias'])) {
     $xtpl->parse('main.getalias');
 }
 
-if (! empty($error)) {
+if (!empty($error)) {
     $xtpl->assign('error', implode('<br />', $error));
     $xtpl->parse('main.error');
 }

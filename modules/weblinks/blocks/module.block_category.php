@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -18,20 +18,21 @@ if (empty($catid)) {
     $catid = 0;
 }
 
-if (! nv_function_exists('nv_weblink_category')) {
+if (!nv_function_exists('nv_weblink_category')) {
+
     function nv_weblink_category()
     {
         global $global_array_cat, $module_file, $module_info;
-
+        
         $xtpl = new XTemplate('block_category.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
         $xtpl->assign('TEMPLATE', $module_info['template']);
         $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
         $xtpl->assign('BLOCK_ID', 'web' . rand(1, 1000));
-
-        if (! empty($global_array_cat)) {
+        
+        if (!empty($global_array_cat)) {
             $title_length = 20;
             $html = '';
-
+            
             foreach ($global_array_cat as $cat) {
                 if ($cat['parentid'] == 0) {
                     $html .= '<li>';
@@ -40,10 +41,10 @@ if (! nv_function_exists('nv_weblink_category')) {
                     $html .= '</li>';
                 }
             }
-
+            
             $xtpl->assign('HTML_CONTENT', $html);
             $xtpl->parse('main');
-
+            
             return $xtpl->text('main');
         }
     }
@@ -51,7 +52,7 @@ if (! nv_function_exists('nv_weblink_category')) {
     function nv_weblink_sub_category($catid, $title_length)
     {
         global $global_array_cat;
-
+        
         if (empty($catid)) {
             return '';
         } else {
@@ -65,7 +66,7 @@ if (! nv_function_exists('nv_weblink_category')) {
                 }
             }
             $html .= '</ul>';
-
+            
             return $html;
         }
     }

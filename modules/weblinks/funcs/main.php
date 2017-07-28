@@ -8,7 +8,7 @@
  * @Createdate 3-31-2010 0:33
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -39,8 +39,9 @@ foreach ($global_array_cat as $catid_i => $array_cat_i) {
             'link' => $array_cat_i['link'],
             'description' => $array_cat_i['description'],
             'catimage' => $array_cat_i['catimage'],
-            'subcat' => array() );
-
+            'subcat' => array()
+        );
+        
         $sql = 'SELECT id, author, title, alias, url, urlimg, note, description, add_time, hits_total FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status = 1 AND catid =' . $catid_i . ' ORDER BY ' . $orderby . $sort . ' LIMIT 0,3';
         $result = $db->query($sql);
         while ($row = $result->fetch()) {
@@ -50,11 +51,12 @@ foreach ($global_array_cat as $catid_i => $array_cat_i) {
         }
     } else {
         $parentid = $array_cat_i['parentid'];
-
+        
         $array_cat[$parentid]['subcat'][] = array(
             'title' => $global_array_cat[$catid_i]['title'],
             'link' => $global_array_cat[$catid_i]['link'],
-            'count_link' => $global_array_cat[$catid_i]['count_link'] );
+            'count_link' => $global_array_cat[$catid_i]['count_link']
+        );
     }
     $array_cat_content[$catid_i] = $content;
 }

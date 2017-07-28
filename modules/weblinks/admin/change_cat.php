@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_FILE_ADMIN')) {
+if (!defined('NV_IS_FILE_ADMIN')) {
     die('Stop!!!');
 }
 
@@ -17,12 +17,12 @@ $mod = $nv_Request->get_string('mod', 'post', '');
 $new_vid = $nv_Request->get_int('new_vid', 'post', 0);
 $content = 'NO_' . $catid;
 
-list($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . intval($catid) . '')->fetch(3);
+list ($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . intval($catid) . '')->fetch(3);
 if ($catid > 0) {
     if ($mod == 'weight' and $new_vid > 0) {
         $sql = 'SELECT catid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid!=' . $catid . ' AND parentid=' . $parentid . ' ORDER BY weight ASC';
         $result = $db->query($sql);
-
+        
         $weight = 0;
         while ($row = $result->fetch()) {
             ++$weight;
@@ -32,10 +32,10 @@ if ($catid > 0) {
             $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $weight . ' WHERE catid=' . intval($row['catid']);
             $db->query($sql);
         }
-
+        
         $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $new_vid . ' WHERE catid=' . intval($catid);
         $db->query($sql);
-
+        
         $content = 'OK_' . $catid;
     } elseif ($mod == 'inhome' and ($new_vid == 0 or $new_vid == 1)) {
         $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET inhome=' . $new_vid . ' WHERE catid=' . intval($catid);
