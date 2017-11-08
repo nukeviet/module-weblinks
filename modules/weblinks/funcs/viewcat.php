@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -53,26 +53,27 @@ $db->sqlreset()
     ->select('COUNT(*)')
     ->from(NV_PREFIXLANG . '_' . $module_data . '_rows')
     ->where('status=1 AND catid=' . intval($catid));
-    
-$num_items = $db->query($db->sql())->fetchColumn();
+
+$num_items = $db->query($db->sql())
+    ->fetchColumn();
 
 $db->select('id, author, title, alias, url, urlimg, add_time, description, hits_total')
     ->order($orderby . $sort)
     ->limit($per_page)
     ->offset(($page - 1) * $per_page);
-    
+
 $result = $db->query($db->sql());
 
 while ($row = $result->fetch()) {
     $author = explode('|', $row['author']);
-
+    
     if ($author[0] == 1) {
         $sql1 = 'SELECT * FROM ' . NV_AUTHORS_GLOBALTABLE . ' WHERE admin_id=' . $author[1] . '';
         $result1 = $db->query($sql1);
         $row1 = $result1->fetch();
         $row['author'] = $row1;
     }
-
+    
     $row['link'] = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
     $row['visit'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=visitlink-' . $row['alias'] . '-' . $row['id'];
     $row['report'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $row['id'];

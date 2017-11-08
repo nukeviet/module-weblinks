@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_MAINFILE')) {
+if (!defined('NV_MAINFILE')) {
     die('Stop!!!');
 }
 
@@ -24,17 +24,17 @@ function _substr($str, $length, $minword = 3)
 {
     $sub = '';
     $len = 0;
-
+    
     foreach (explode(' ', $str) as $word) {
         $part = (($sub != '') ? ' ' : '') . $word;
         $sub .= $part;
         $len += strlen($part);
-
+        
         if (isset($word{$minword}) && isset($sub{$length - 1})) {
             break;
         }
     }
-
+    
     return $sub . ((isset($str{$len})) ? '...' : '');
 }
 

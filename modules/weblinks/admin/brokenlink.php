@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_FILE_ADMIN')) {
+if (!defined('NV_IS_FILE_ADMIN')) {
     die('Stop!!!');
 }
 
@@ -31,7 +31,7 @@ $sql = 'SELECT a.url, a.title, b.type, a.id FROM ' . NV_PREFIXLANG . '_' . $modu
 
 if ($all_page > 0) {
     $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=delbroken');
-
+    
     $result = $db->query($sql);
     while ($row = $result->fetch()) {
         $xtpl->assign('ROW', array(
@@ -39,18 +39,19 @@ if ($all_page > 0) {
             'title' => $row['title'],
             'url' => $row['url'],
             'type' => $row['type'] == 1 ? $lang_module['weblink_link_broken_die'] : $lang_module['weblink_link_broken_bad'],
-            'url_edit' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=content&amp;id=' . $row['id'] ));
-
+            'url_edit' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=content&amp;id=' . $row['id']
+        ));
+        
         $xtpl->parse('main.data.loop');
     }
-
+    
     $xtpl->parse('main.data');
 } else {
     $xtpl->parse('main.empty');
 }
 
 $generate_page = nv_generate_page($base_url, $all_page, $per_page, $page);
-if (! empty($generate_page)) {
+if (!empty($generate_page)) {
     $xtpl->assign('GENERATE_PAGE', $generate_page);
     $xtpl->parse('main.generate_page');
 }

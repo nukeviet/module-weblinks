@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -17,7 +17,7 @@ $items = array();
 
 $channel['title'] = $module_info['custom_title'];
 $channel['link'] = NV_MY_DOMAIN . NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
-$channel['description'] = ! empty($module_info['description']) ? $module_info['description'] : $global_config['site_description'];
+$channel['description'] = !empty($module_info['description']) ? $module_info['description'] : $global_config['site_description'];
 $catid = 0;
 if (isset($array_op[1])) {
     $alias_cat_url = $array_op[1];
@@ -29,26 +29,27 @@ if (isset($array_op[1])) {
         }
     }
 }
-if (! empty($catid)) {
+if (!empty($catid)) {
     $channel['title'] = $module_info['custom_title'] . ' - ' . $global_array_cat[$catid]['title'];
     $channel['link'] = NV_MY_DOMAIN . NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] . '/' . $alias_cat_url;
     $channel['description'] = $global_array_cat[$catid]['description'];
-
+    
     $sql = 'SELECT id, catid, add_time, title, alias, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid=' . intval($catid) . ' AND status=1 ORDER BY id ASC LIMIT 30';
 } else {
     $sql = 'SELECT id, catid, add_time, title, alias, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status=1 ORDER BY id ASC LIMIT 30';
 }
 if ($module_info['rss']) {
     $result = $db->query($sql);
-    while (list($id, $catid_i, $publtime, $title, $alias, $description, $urlimg) = $result->fetch(3)) {
-        $rimages = (! empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
+    while (list ($id, $catid_i, $publtime, $title, $alias, $description, $urlimg) = $result->fetch(3)) {
+        $rimages = (!empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
         $catalias = $global_array_cat[$catid_i]['alias'];
         $items[] = array(
             'title' => $title,
             'link' => NV_MY_DOMAIN . NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $catalias . '/' . $alias . '-' . $id,
             'guid' => $module_name . '_' . $id,
             'description' => $rimages . $description,
-            'pubdate' => $publtime );
+            'pubdate' => $publtime
+        );
     }
 }
 

@@ -9,7 +9,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_ADMIN') or ! defined('NV_MAINFILE')) {
+if (!defined('NV_ADMIN') or !defined('NV_MAINFILE')) {
     die('Stop!!!');
 }
 
@@ -29,7 +29,7 @@ $lang_module['action'] = 'Thao tác';
 $lang_module['msgnocheck'] = 'Hãy chọn ít nhất một dòng để thực hiện';
 $lang_module['alias'] = 'Liên kết tĩnh';
 $lang_module['name'] = 'Tiêu đề';
-$lang_module['weight'] = 'vị trí';
+$lang_module['weight'] = 'Vị trí';
 $lang_module['inhome'] = 'Hiển thị trang chủ';
 $lang_module['numlinks'] = 'Số liên kết';
 $lang_module['add_cat'] = 'Thêm chủ đề';

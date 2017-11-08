@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_RSS')) {
+if (!defined('NV_IS_MOD_RSS')) {
     die('Stop!!!');
 }
 

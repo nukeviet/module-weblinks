@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_ADMIN') or ! defined('NV_MAINFILE') or ! defined('NV_IS_MODADMIN')) {
+if (!defined('NV_ADMIN') or !defined('NV_MAINFILE') or !defined('NV_IS_MODADMIN')) {
     die('Stop!!!');
 }
 
@@ -29,7 +29,7 @@ $allow_func = array(
 
 define('NV_IS_FILE_ADMIN', true);
 
-require_once(NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php');
+require_once (NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php');
 
 /**
  * nv_fix_cat()
@@ -40,17 +40,17 @@ require_once(NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php');
 function nv_fix_cat($parentid)
 {
     global $db, $module_data;
-
+    
     $sql = 'SELECT catid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE parentid=' . $parentid . ' ORDER BY weight ASC';
     $result = $db->query($sql);
-
+    
     $weight = 0;
     while ($row = $result->fetch()) {
         ++$weight;
         $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $weight . ' WHERE catid=' . intval($row['catid']);
         $db->query($sql);
     }
-
+    
     $result->closeCursor();
 }
 

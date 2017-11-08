@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -26,7 +26,7 @@ $page_title = $row['title'] . ' - ' . $global_array_cat[$row['catid']]['title'];
 $row['visit'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=visitlink-' . $row['alias'] . '-' . $row['id'];
 $row['report'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $row['id'], true);
 
-if (! empty($row['urlimg'])) {
+if (!empty($row['urlimg'])) {
     $row['urlimg'] = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $row['urlimg'];
 } else {
     $row['urlimg'] = NV_BASE_SITEURL . 'themes/' . $module_info['template'] . '/images/' . $module_file . '/no_image.gif';

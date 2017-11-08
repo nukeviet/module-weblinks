@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_FILE_ADMIN')) {
+if (!defined('NV_IS_FILE_ADMIN')) {
     die('Stop!!!');
 }
 
@@ -18,21 +18,21 @@ $submit = $nv_Request->get_string('submit', 'post');
 
 $error = 0;
 
-if (! empty($submit)) {
+if (!empty($submit)) {
     $weblinks_config['sort'] = ($nv_Request->get_string('sort', 'post') == 'asc') ? 'asc' : 'des';
-    $weblinks_config['sortoption'] =  nv_htmlspecialchars($nv_Request->get_string('sortoption', 'post', 'byid'));
+    $weblinks_config['sortoption'] = nv_htmlspecialchars($nv_Request->get_string('sortoption', 'post', 'byid'));
     $weblinks_config['showlinkimage'] = $nv_Request->get_int('showlinkimage', 'post', 0);
     $weblinks_config['imgwidth'] = ($nv_Request->get_int('imgwidth', 'post') >= 0) ? $nv_Request->get_int('imgwidth', 'post') : 100;
     $weblinks_config['imgheight'] = ($nv_Request->get_int('imgheight', 'post') >= 0) ? $nv_Request->get_int('imgheight', 'post') : 75;
     $weblinks_config['per_page'] = ($nv_Request->get_int('per_page', 'post') >= 0) ? $nv_Request->get_int('per_page', 'post') : 10;
-
+    
     $sth = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_config SET value = :value WHERE name = :name');
     foreach ($weblinks_config as $name => $value) {
         $sth->bindParam(':name', $name, PDO::PARAM_STR);
         $sth->bindParam(':value', $value, PDO::PARAM_STR);
         $sth->execute();
     }
-
+    
     $sth->closeCursor();
     $nv_Cache->delMod($module_name);
 }

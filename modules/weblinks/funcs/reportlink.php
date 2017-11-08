@@ -8,7 +8,7 @@
  * @Createdate 10 April 2017 17:00
  */
 
-if (! defined('NV_IS_MOD_WEBLINKS')) {
+if (!defined('NV_IS_MOD_WEBLINKS')) {
     die('Stop!!!');
 }
 
@@ -25,26 +25,26 @@ if (!empty($row)) {
     $row['error'] = '';
     $row['action'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $id, true);
     $row['id'] = $id;
-
+    
     $check = false;
     if ($submit and $report_id) {
         $sql = 'SELECT type FROM ' . NV_PREFIXLANG . '_' . $module_data . '_report WHERE id=' . intval($report_id);
         $result = $db->query($sql);
         $rows = $result->fetch();
-
+        
         $report = $nv_Request->get_int('report', 'post');
         $report_note = nv_substr($nv_Request->get_title('report_note', 'post', '', 1), 0, 255);
-
+        
         $row['report_note'] = $report_note;
         if ($report == 0 and empty($report_note)) {
             $row['error'] = $lang_module['error'];
-        } elseif (! empty($report_note) and ! isset($report_note{9})) {
+        } elseif (!empty($report_note) and !isset($report_note{9})) {
             $row['error'] = $lang_module['error_word_min'];
         } elseif ($rows['type'] == $report) {
             $check = true;
         } else {
             $report_note = nv_nl2br($report_note);
-
+            
             $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_report SET
 				id=' . $report_id . ',
 				type=' . $report . ',
@@ -56,11 +56,11 @@ if (!empty($row)) {
 				report_os_key=' . $db->quote($client_info['client_os']['key']) . ',
 				report_os_name=' . $db->quote($client_info['client_os']['name']) . ',
 				report_note=' . $db->quote($report_note);
-
+            
             $check = $db->query($sql);
         }
     }
-
+    
     $contents = call_user_func('report', $row, $check);
     
     include NV_ROOTDIR . '/includes/header.php';
