@@ -121,6 +121,6 @@ if (!empty($array_op)) {
             );
             $parentid = $array_cat_i['parentid'];
         }
-        sort($array_mod_title, SORT_NUMERIC);
+        krsort($array_mod_title, SORT_NUMERIC);
     }
 }
