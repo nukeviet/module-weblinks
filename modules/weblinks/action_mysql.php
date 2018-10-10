@@ -60,7 +60,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
 ) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_config (
-  name varchar(20) default NULL,
+  name varchar(20) default NOT NULL,
   value varchar(255) default NULL,
   PRIMARY KEY  (name)
 ) ENGINE=MyISAM";
