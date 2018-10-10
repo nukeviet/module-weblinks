@@ -59,10 +59,10 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   UNIQUE KEY parentid (parentid,title)
 ) ENGINE=MyISAM";
 
-$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_config (
-  name varchar(20) default NULL,
-  value varchar(255) default NULL,
-  UNIQUE (name)
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "" . $lang . "" . $module_data . "_config (
+    name varchar(20) default NOT NULL,
+    value varchar(255) default NULL,
+    PRIMARY KEY (name)
 ) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_report (
