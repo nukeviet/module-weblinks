@@ -21,8 +21,8 @@ $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id =
 $result = $db->query($sql);
 $row = $result->fetch();
 
-$page_url = $base_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
-$canonicalUrl = getCanonicalUrl($page_url, true, true);
+$base_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
+$canonicalUrl = getCanonicalUrl($base_url, true, true);
 
 $page_title = $row['title'] . ' - ' . $global_array_cat[$row['catid']]['title'];
 
