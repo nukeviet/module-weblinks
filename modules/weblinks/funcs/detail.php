@@ -21,6 +21,9 @@ $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id =
 $result = $db->query($sql);
 $row = $result->fetch();
 
+$page_url = $base_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
+$canonicalUrl = getCanonicalUrl($page_url, true, true);
+
 $page_title = $row['title'] . ' - ' . $global_array_cat[$row['catid']]['title'];
 
 $row['visit'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=visitlink-' . $row['alias'] . '-' . $row['id'];
