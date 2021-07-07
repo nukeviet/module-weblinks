@@ -62,6 +62,9 @@ $db->sqlreset()
 $num_items = $db->query($db->sql())
     ->fetchColumn();
 
+$urlappend = '&amp;' . NV_OP_VARIABLE . '=page-';
+betweenURLs($page, ceil($num_items/$per_page), $base_url, $urlappend, $prevPage, $nextPage);
+
 $db->select('id, author, title, alias, url, urlimg, add_time, description, hits_total')
     ->order($orderby . $sort)
     ->limit($per_page)
