@@ -49,9 +49,9 @@ function main_theme($array_cat, $array_cat_content)
                     $xtpl->assign('WEBLINK_VIEW', $content['link']);
                     if ($weblinks_config['showlinkimage'] == '1') {
                         if ($content['urlimg'] != '') {
-                            $urlimg = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $content['urlimg'];
+                            $urlimg = NV_STATIC_URL . NV_ASSETS_DIR . '/' . $content['urlimg'];
                         } else {
-                            $urlimg = NV_BASE_SITEURL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif';
+                            $urlimg = NV_STATIC_URL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif';
                         }
                         $xtpl->assign('SRC_IMG', $urlimg);
                         $xtpl->parse('main.loop_tab_cate.have_data.img');
@@ -107,7 +107,7 @@ function viewcat($array_subcat, $array_cat, $items)
                     $xtpl->assign('IMG', NV_BASE_SITEURL . $array_subcat_i['catimage']);
                 }
             } else {
-                $xtpl->assign('IMG', NV_BASE_SITEURL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif');
+                $xtpl->assign('IMG', NV_STATIC_URL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif');
             }
             $xtpl->parse('main.sub.loop');
             ++$a;
@@ -120,9 +120,9 @@ function viewcat($array_subcat, $array_cat, $items)
             $items_i['description'] = strip_tags($items_i['description']);
             $items_i['description'] = _substr($items_i['description'], 200);
             if (!empty($items_i['urlimg'])) {
-                $urlimg = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $items_i['urlimg'];
+                $urlimg = NV_STATIC_URL . NV_ASSETS_DIR . '/' . $items_i['urlimg'];
             } else {
-                $urlimg = NV_BASE_SITEURL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif';
+                $urlimg = NV_STATIC_URL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif';
             }
             $xtpl->assign('IMG', $urlimg);
             $items_i['url'] = nv_clean60($items_i['url'], 70) . '...';
@@ -161,7 +161,7 @@ function detail($row)
             }
             $xtpl->assign('IMG', $row['urlimg']);
         } else {
-            $xtpl->assign('IMG', NV_BASE_SITEURL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif');
+            $xtpl->assign('IMG', NV_STATIC_URL . 'themes/' . $module_info['template'] . '/images/' . $module_info['module_theme'] . '/no_image.gif');
         }
         $xtpl->parse('main.img');
     }
