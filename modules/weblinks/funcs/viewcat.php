@@ -47,7 +47,12 @@ if ($weblinks_config['sortoption'] == 'byhit') {
 } else {
     $orderby = 'rand() ';
 }
-$base_url = $global_array_cat[$catid]['link'];
+$page_url = $base_url = $global_array_cat[$catid]['link'];
+
+if ($page > 1) {
+    $page_url .= '/page-' . $page;
+}
+$canonicalUrl = getCanonicalUrl($page_url, true, true);
 
 $db->sqlreset()
     ->select('COUNT(*)')
@@ -56,6 +61,8 @@ $db->sqlreset()
 
 $num_items = $db->query($db->sql())
     ->fetchColumn();
+
+betweenURLs($page, ceil($num_items/$per_page), $base_url, '/page-', $prevPage, $nextPage);
 
 $db->select('id, author, title, alias, url, urlimg, add_time, description, hits_total')
     ->order($orderby . $sort)

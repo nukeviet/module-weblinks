@@ -28,8 +28,11 @@ if ($weblinks_config['sortoption'] == 'byhit') {
     $orderby = 'rand() ';
 }
 
+$page_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
+$canonicalUrl = getCanonicalUrl($page_url, true, true);
+
 $array_cat_content = array();
-$urllink = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=';
+$urllink = $page_url . '&amp;' . NV_OP_VARIABLE . '=';
 
 foreach ($global_array_cat as $catid_i => $array_cat_i) {
     $content = array();
