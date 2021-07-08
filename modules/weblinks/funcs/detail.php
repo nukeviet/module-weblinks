@@ -21,8 +21,8 @@ $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id =
 $result = $db->query($sql);
 $row = $result->fetch();
 
-$base_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
-$canonicalUrl = getCanonicalUrl($base_url, true, true);
+$page_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
+$canonicalUrl = getCanonicalUrl($page_url, true, true);
 
 $page_title = $row['title'] . ' - ' . $global_array_cat[$row['catid']]['title'];
 
@@ -30,7 +30,7 @@ $row['visit'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LAN
 $row['report'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=reportlink-' . $row['alias'] . '-' . $row['id'], true);
 
 if (!empty($row['urlimg'])) {
-    $row['urlimg'] = NV_STATIC_URL . NV_ASSETS_DIR . '/' . $row['urlimg'];
+    $row['urlimg'] = NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $row['urlimg'];
 } else {
     $row['urlimg'] = NV_STATIC_URL . 'themes/' . $module_info['template'] . '/images/' . $module_file . '/no_image.gif';
 }

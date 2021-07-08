@@ -43,7 +43,7 @@ if (!empty($catid)) {
 if ($module_info['rss']) {
     $result = $db->query($sql);
     while (list ($id, $catid_i, $publtime, $title, $alias, $description, $urlimg) = $result->fetch(3)) {
-        $rimages = (!empty($urlimg)) ? '<img src="' . NV_STATIC_URL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
+        $rimages = (!empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
         $catalias = $global_array_cat[$catid_i]['alias'];
         $items[] = array(
             'title' => $title,
