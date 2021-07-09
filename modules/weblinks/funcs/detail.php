@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_IS_MOD_WEBLINKS')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 $key_words = $module_info['keywords'];
@@ -17,7 +18,7 @@ $mod_title = isset($lang_module['main_title']) ? $lang_module['main_title'] : $m
 
 global $global_array_cat;
 
-$sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id = ' . intval($id);
+$sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id = ' . (int) $id;
 $result = $db->query($sql);
 $row = $result->fetch();
 

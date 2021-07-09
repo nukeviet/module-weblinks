@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_IS_FILE_ADMIN')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 $page_title = $lang_module['weblink_config'];
@@ -25,14 +26,14 @@ if (!empty($submit)) {
     $weblinks_config['imgwidth'] = ($nv_Request->get_int('imgwidth', 'post') >= 0) ? $nv_Request->get_int('imgwidth', 'post') : 100;
     $weblinks_config['imgheight'] = ($nv_Request->get_int('imgheight', 'post') >= 0) ? $nv_Request->get_int('imgheight', 'post') : 75;
     $weblinks_config['per_page'] = ($nv_Request->get_int('per_page', 'post') >= 0) ? $nv_Request->get_int('per_page', 'post') : 10;
-    
+
     $sth = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_config SET value = :value WHERE name = :name');
     foreach ($weblinks_config as $name => $value) {
         $sth->bindParam(':name', $name, PDO::PARAM_STR);
         $sth->bindParam(':value', $value, PDO::PARAM_STR);
         $sth->execute();
     }
-    
+
     $sth->closeCursor();
     $nv_Cache->delMod($module_name);
 }

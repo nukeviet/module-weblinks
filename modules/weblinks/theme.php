@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_IS_MOD_WEBLINKS')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 /**
@@ -22,11 +23,11 @@ if (!defined('NV_IS_MOD_WEBLINKS')) {
 function main_theme($array_cat, $array_cat_content)
 {
     global $module_info, $lang_module, $weblinks_config;
-    
+
     $xtpl = new XTemplate('main_page.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('BASE_URL', NV_BASE_SITEURL);
     $xtpl->assign('SRC_IMG_WIDTH', $weblinks_config['imgwidth']);
-    
+
     foreach ($array_cat as $catid => $array_cat_i) {
         if (!empty($array_cat_i) and !empty($array_cat_content[$catid])) {
             $xtpl->assign('CATE_TITLE', $array_cat_i['title']);
@@ -74,6 +75,7 @@ function main_theme($array_cat, $array_cat_content)
         }
     }
     $xtpl->parse('main');
+
     return $xtpl->text('main');
 }
 
@@ -88,7 +90,7 @@ function main_theme($array_cat, $array_cat_content)
 function viewcat($array_subcat, $array_cat, $items)
 {
     global $module_info, $lang_module, $weblinks_config;
-    
+
     $xtpl = new XTemplate('viewcat.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
     foreach ($array_cat as $array_cat_i) {
@@ -138,6 +140,7 @@ function viewcat($array_subcat, $array_cat, $items)
         $xtpl->parse('main.items');
     }
     $xtpl->parse('main');
+
     return $xtpl->text('main');
 }
 
@@ -150,7 +153,7 @@ function viewcat($array_subcat, $array_cat, $items)
 function detail($row)
 {
     global $module_info, $lang_module, $weblinks_config;
-    
+
     $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $row['add_time'] = nv_date('H:i l - d/m/Y', $row['add_time']);
     $row['edit_time'] = nv_date('H:i l - d/m/Y', $row['edit_time']);
@@ -173,6 +176,7 @@ function detail($row)
         $xtpl->assign('ADMIN_LINK', adminlink($row['id']));
     }
     $xtpl->parse('main');
+
     return $xtpl->text('main');
 }
 
@@ -186,21 +190,22 @@ function detail($row)
 function report($row, $check)
 {
     global $module_info, $lang_module;
-    
+
     $xtpl = new XTemplate('report.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
     $xtpl->assign('ROW', $row);
     $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
-    
+
     if (!empty($row['error'])) {
         $xtpl->parse('main.error');
     }
-    
+
     if ($check) {
         $xtpl->parse('main.close');
         $xtpl->parse('main.success');
     }
-    
+
     $xtpl->parse('main');
+
     return $xtpl->text('main');
 }

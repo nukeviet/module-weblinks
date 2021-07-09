@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_IS_FILE_ADMIN')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 $page_title = $lang_module['weblink_link_broken'];
@@ -31,20 +32,20 @@ $sql = 'SELECT a.url, a.title, b.type, a.id FROM ' . NV_PREFIXLANG . '_' . $modu
 
 if ($all_page > 0) {
     $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=delbroken');
-    
+
     $result = $db->query($sql);
     while ($row = $result->fetch()) {
-        $xtpl->assign('ROW', array(
+        $xtpl->assign('ROW', [
             'id' => $row['id'],
             'title' => $row['title'],
             'url' => $row['url'],
             'type' => $row['type'] == 1 ? $lang_module['weblink_link_broken_die'] : $lang_module['weblink_link_broken_bad'],
             'url_edit' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=content&amp;id=' . $row['id']
-        ));
-        
+        ]);
+
         $xtpl->parse('main.data.loop');
     }
-    
+
     $xtpl->parse('main.data');
 } else {
     $xtpl->parse('main.empty');
