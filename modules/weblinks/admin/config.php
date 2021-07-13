@@ -20,12 +20,16 @@ $submit = $nv_Request->get_string('submit', 'post');
 $error = 0;
 
 if (!empty($submit)) {
+    $weblinks_config['homepage'] = $nv_Request->get_int('homepage', 'post');
+    $weblinks_config['report_timeout'] = $nv_Request->get_int('report_timeout', 'post');
+    $weblinks_config['timeout'] = $nv_Request->get_int('timeout', 'post');
     $weblinks_config['sort'] = ($nv_Request->get_string('sort', 'post') == 'asc') ? 'asc' : 'des';
     $weblinks_config['sortoption'] = nv_htmlspecialchars($nv_Request->get_string('sortoption', 'post', 'byid'));
     $weblinks_config['showlinkimage'] = $nv_Request->get_int('showlinkimage', 'post', 0);
     $weblinks_config['imgwidth'] = ($nv_Request->get_int('imgwidth', 'post') >= 0) ? $nv_Request->get_int('imgwidth', 'post') : 100;
     $weblinks_config['imgheight'] = ($nv_Request->get_int('imgheight', 'post') >= 0) ? $nv_Request->get_int('imgheight', 'post') : 75;
     $weblinks_config['per_page'] = ($nv_Request->get_int('per_page', 'post') >= 0) ? $nv_Request->get_int('per_page', 'post') : 10;
+    $weblinks_config['new_icon'] = $nv_Request->get_int('new_icon', 'post');
 
     $sth = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_config SET value = :value WHERE name = :name');
     foreach ($weblinks_config as $name => $value) {
@@ -55,6 +59,41 @@ $xtpl->assign('NV_OP_VARIABLE', NV_OP_VARIABLE);
 $xtpl->assign('OP', $op);
 $xtpl->assign('LANG', $lang_module);
 $xtpl->assign('DATA', $weblinks_config);
+
+$homepage_options = [1, 2];
+foreach ($homepage_options as $option) {
+    $xtpl->assign('HOMEPAGE', [
+        'key' => $option,
+        'title' => $lang_module['homepage_' . $option],
+        'sel' => $weblinks_config['homepage'] == $option ? ' selected' : ''
+    ]);
+    $xtpl->parse('main.homepage_option');
+}
+
+for ($i = 1; $i <= 30; ++$i) {
+    $xtpl->assign('TIMEOUT', [
+        'key' => $i,
+        'sel' => $weblinks_config['timeout'] == $i ? ' selected' : ''
+    ]);
+    $xtpl->parse('main.timeout_option');
+}
+
+for ($i = 1; $i <= 30; ++$i) {
+    $y = $i * 5;
+    $xtpl->assign('RTIMEOUT', [
+        'key' => $y,
+        'sel' => $weblinks_config['report_timeout'] == $y ? ' selected' : ''
+    ]);
+    $xtpl->parse('main.report_timeout_option');
+}
+
+for ($i = 0; $i <= 30; ++$i) {
+    $xtpl->assign('NEWICON', [
+        'key' => $i,
+        'sel' => $weblinks_config['new_icon'] == $i ? ' selected' : ''
+    ]);
+    $xtpl->parse('main.new_icon');
+}
 
 $xtpl->parse('main');
 $contents .= $xtpl->text('main');

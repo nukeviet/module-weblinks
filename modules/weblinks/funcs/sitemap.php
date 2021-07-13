@@ -20,7 +20,7 @@ $cacheTTL = 7200;
 if (($cache = $nv_Cache->getItem($module_name, $cacheFile, $cacheTTL)) != false) {
     $url = unserialize($cache);
 } else {
-    $sql = 'SELECT id, catid, add_time, alias FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status=1 ORDER BY id ASC LIMIT 1000';
+    $sql = 'SELECT id, catid, add_time, alias FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status=1 ORDER BY add_time DESC LIMIT 1000';
     $result = $db->query($sql);
 
     while (list($id, $catid_i, $publtime, $alias) = $result->fetch(3)) {

@@ -16,10 +16,10 @@ if (!defined('NV_MAINFILE')) {
 /**
  * _substr()
  *
- * @param mixed $str
- * @param mixed $length
- * @param int   $minword
- * @return
+ * @param string $str
+ * @param int    $length
+ * @param int    $minword
+ * @return string
  */
 function _substr($str, $length, $minword = 3)
 {

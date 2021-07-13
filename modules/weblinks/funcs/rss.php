@@ -37,13 +37,15 @@ if (!empty($catid)) {
     $channel['link'] = NV_MY_DOMAIN . NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss'] . '/' . $alias_cat_url;
     $channel['description'] = $global_array_cat[$catid]['description'];
 
-    $sql = 'SELECT id, catid, add_time, title, alias, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid=' . (int) $catid . ' AND status=1 ORDER BY id ASC LIMIT 30';
+    $sql = 'SELECT id, catid, add_time, title, alias, url, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid=' . (int) $catid . ' AND status=1 ORDER BY add_time DESC LIMIT 30';
 } else {
-    $sql = 'SELECT id, catid, add_time, title, alias, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status=1 ORDER BY id ASC LIMIT 30';
+    $sql = 'SELECT id, catid, add_time, title, alias, url, description, urlimg FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status=1 ORDER BY add_time DESC LIMIT 30';
 }
 if ($module_info['rss']) {
     $result = $db->query($sql);
-    while (list($id, $catid_i, $publtime, $title, $alias, $description, $urlimg) = $result->fetch(3)) {
+    while (list($id, $catid_i, $publtime, $title, $alias, $url, $description, $urlimg) = $result->fetch(3)) {
+        !empty($description) && $description = ' [' . strip_tags($description) . ']';
+        $description = $lang_module['name'] . ': ' . $url . $description;
         $rimages = (!empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
         $catalias = $global_array_cat[$catid_i]['alias'];
         $items[] = [

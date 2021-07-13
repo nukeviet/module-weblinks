@@ -42,10 +42,6 @@ if ($catid > 0) {
         $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET inhome=' . $new_vid . ' WHERE catid=' . (int) $catid;
         $db->query($sql);
         $content = 'OK_' . $catid;
-    } elseif ($mod == 'numlinks' and $new_vid >= 0 and $new_vid <= 10) {
-        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET numlinks=' . $new_vid . ' WHERE catid=' . (int) $catid;
-        $db->query($sql);
-        $content = 'OK_' . $catid;
     }
     $nv_Cache->delMod($module_name);
 }

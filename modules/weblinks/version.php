@@ -20,7 +20,7 @@ $module_version = [
     'virtual' => 1,
     'version' => '4.5.00',
     'date' => 'Thursday, July 8, 2021 09:00:00 GMT+07:00',
-    'author' => 'VINADES (contact@vinades.vn)',
+    'author' => 'VINADES.,JSC <contact@vinades.vn>',
     'note' => '',
     'uploads_dir' => [
         $module_name,

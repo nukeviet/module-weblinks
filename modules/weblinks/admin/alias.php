@@ -14,7 +14,9 @@ if (!defined('NV_IS_FILE_ADMIN')) {
 }
 
 $title = $nv_Request->get_title('title', 'post', '');
-$alias = change_alias($title);
+$type = $nv_Request->get_title('type', 'post', '');
+$id = $nv_Request->get_int('id', 'post', 0);
+$alias = setAlias($title, $type, $id);
 
 include NV_ROOTDIR . '/includes/header.php';
 echo $alias;

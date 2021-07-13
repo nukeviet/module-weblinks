@@ -23,77 +23,66 @@ $sql_drop_module[] = 'DROP TABLE IF EXISTS ' . $db_config['prefix'] . '_' . $lan
 $sql_create_module = $sql_drop_module;
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_rows (
-  id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  catid mediumint(9) NOT NULL,
-  author varchar(100) NOT NULL DEFAULT '1|1',
-  title varchar(255) NOT NULL,
-  alias varchar(255) NOT NULL,
-  url varchar(255) NOT NULL,
-  urlimg varchar(255) NOT NULL,
-  admin_phone varchar(255) NOT NULL,
-  admin_email varchar(255) NOT NULL,
-  note varchar(255) NOT NULL,
-  description text NOT NULL,
-  add_time int(11) unsigned NOT NULL DEFAULT '0',
-  edit_time int(11) unsigned NOT NULL DEFAULT '0',
-  hits_total mediumint(8) unsigned NOT NULL DEFAULT '0',
-  status tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (id),
-  KEY catid (catid),
-  KEY status (status)
-) ENGINE=MyISAM";
+	`id` MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`catid` MEDIUMINT(8) NOT NULL,
+	`title` VARCHAR(255) NOT NULL,
+	`alias` VARCHAR(255) NOT NULL,
+	`url` VARCHAR(255) NOT NULL,
+	`urlimg` VARCHAR(255) NOT NULL DEFAULT '',
+	`description` TEXT NOT NULL,
+	`add_time` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+	`edit_time` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+	`hits_total` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+	`status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `alias` (`alias`(191)),
+	INDEX `catid` (`catid`),
+	INDEX `status` (`status`)
+)";
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_cat (
-  catid mediumint(8) unsigned NOT NULL auto_increment,
-  parentid mediumint(8) unsigned NOT NULL default '0',
-  title varchar(100) NOT NULL,
-  catimage varchar(100) NOT NULL,
-  alias varchar(100) NOT NULL,
-  description text,
-  weight smallint(4) NOT NULL default '0',
-  inhome tinyint(1) unsigned NOT NULL default '0',
-  numlinks tinyint(2) unsigned NOT NULL default '3',
-  keywords text NOT NULL,
-  add_time int(11) unsigned NOT NULL,
-  edit_time int(11) unsigned NOT NULL,
-  PRIMARY KEY  (catid),
-  UNIQUE KEY parentid (parentid,title)
-) ENGINE=MyISAM";
+	`catid` MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`parentid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+	`title` VARCHAR(100) NOT NULL,
+	`catimage` VARCHAR(255) NOT NULL DEFAULT '',
+	`alias` VARCHAR(100) NOT NULL,
+	`description` TEXT NOT NULL,
+	`weight` SMALLINT(4) NOT NULL DEFAULT '0',
+	`inhome` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+	`keywords` TEXT NOT NULL,
+	`add_time` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+	`edit_time` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+	PRIMARY KEY (`catid`),
+	UNIQUE INDEX `alias` (`alias`)
+)";
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_config (
-  name varchar(20) NOT NULL,
-  value varchar(255) NOT NULL default '',
-  PRIMARY KEY  (name)
-) ENGINE=MyISAM";
+	`name` VARCHAR(20) NOT NULL,
+	`value` VARCHAR(255) NOT NULL DEFAULT '',
+	PRIMARY KEY (`name`)
+)";
 
-$sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . '_report (
-  id int(11) DEFAULT NULL,
-  type int(1) DEFAULT NULL,
-  report_time int(11) NOT NULL,
-  report_userid int(11) NOT NULL,
-  report_ip varchar(16) NOT NULL,
-  report_browse_key varchar(100) NOT NULL,
-  report_browse_name varchar(100) NOT NULL,
-  report_os_key varchar(100) NOT NULL,
-  report_os_name varchar(100) NOT NULL,
-  report_note varchar(255) NOT NULL,
-  KEY id (id)
-) ENGINE=MyISAM';
+$sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_report (
+	`id` INT(11) NULL DEFAULT NULL,
+	`type` INT(1) NULL DEFAULT NULL,
+	`report_time` INT(11) NOT NULL,
+	`report_ip` VARCHAR(16) NOT NULL,
+	`report_browse_key` VARCHAR(100) NOT NULL DEFAULT '',
+	`report_browse_name` VARCHAR(100) NOT NULL DEFAULT '',
+	`report_os_key` VARCHAR(100) NOT NULL DEFAULT '',
+	`report_os_name` VARCHAR(100) NOT NULL DEFAULT '',
+	`report_note` VARCHAR(255) NOT NULL DEFAULT '',
+	INDEX `id` (`id`)
+)";
 
 $sql_create_module[] = 'INSERT INTO ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_config (name, value) VALUES
-('intro', ''),
-('numcat', '2'),
-('showsub', '1'),
-('numsub', '2'),
-('numinsub', '1'),
-('showcatimage', '0'),
-('per_page', '20'),
-('numsubcat', '2'),
-('shownumsubcat', '1'),
-('sort', 'asc'),
-('showlinkimage', '1'),
-('showdes', '1'),
-('sortoption', 'byid'),
 ('imgwidth', '100'),
 ('imgheight', '74'),
-('timeout', '1')";
+('per_page', '20'),
+('homepage', '1'),
+('sort', 'des'),
+('sortoption', 'bytime'),
+('showlinkimage', '1'),
+('timeout', '2'),
+('report_timeout', '60'),
+('new_icon', '3')";

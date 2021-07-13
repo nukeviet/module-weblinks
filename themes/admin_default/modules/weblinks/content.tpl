@@ -3,10 +3,7 @@
 <div class="alert alert-warning">{error}</div>
 <!-- END: error -->
 <div id="list_mods">
-	<form action="{NV_BASE_ADMINURL}index.php" method="post" class="form-horizontal">
-		<input type="hidden" name ="{NV_NAME_VARIABLE}" value="{MODULE_NAME}" />
-		<input type="hidden" name ="{NV_OP_VARIABLE}" value="{OP}" />
-		<input type="hidden" name ="id" value="{DATA.id}" />
+	<form action="{FORM_ACTION}" method="post" class="form-horizontal">
 		<input type="hidden" name ="save" value="1" />
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover">
@@ -19,17 +16,17 @@
 						<td>{LANG.alias} : </td>
 						<td>
 							<input id="idalias" class="form-control w500" name="alias" type="text" value="{DATA.alias}" maxlength="255" style="display:inline-block"/>
-							&nbsp;<em class="fa fa-refresh fa-lg fa-pointer text-middle" onclick="get_alias();">&nbsp;</em>
+							&nbsp;<em class="fa fa-refresh fa-lg fa-pointer text-middle" onclick="get_alias('row', {DATA.id});">&nbsp;</em>
 						</td>
 					</tr>
 					<tr>
 						<td>{LANG.weblink_add_url} : </td>
-						<td><input class="form-control" name="url" id= "url" type="text" value="{DATA.url}" maxlength="255" /></td>
+						<td><input class="form-control w500" name="url" id= "url" type="text" value="{DATA.url}" maxlength="255" /></td>
 					</tr>
 					<tr>
 						<td>{LANG.weblink_add_parent} : </td>
 						<td>
-						<select class="form-control" name="catid">
+						<select class="form-control w500" name="catid">
 							<!-- BEGIN: loopcat -->
 							<option value="{CAT.catid}" {CAT.sl}>{CAT.title}</option>
 							<!-- END: loopcat -->
@@ -82,7 +79,7 @@
 <!-- BEGIN: getalias -->
 <script type="text/javascript">
 	$("#idtitle").change(function() {
-		get_alias();
+		get_alias('row', {DATA.id});
 	});
 </script>
 <!-- END: getalias -->
