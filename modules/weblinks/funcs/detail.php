@@ -22,7 +22,7 @@ $result = $db->query($sql);
 $row = $result->fetch();
 
 $page_url = $global_array_cat[$catid]['link'] . '/' . $row['alias'] . '-' . $row['id'];
-$canonicalUrl = getCanonicalUrl($page_url, true, true);
+$canonicalUrl = getCanonicalUrl($page_url);
 
 $page_title = $row['title'] . ' - ' . $global_array_cat[$row['catid']]['title'];
 

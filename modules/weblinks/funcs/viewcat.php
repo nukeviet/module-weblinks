@@ -52,7 +52,7 @@ $page_url = $base_url = $global_array_cat[$catid]['link'];
 if ($page > 1) {
     $page_url .= '/page-' . $page;
 }
-$canonicalUrl = getCanonicalUrl($page_url, true, true);
+$canonicalUrl = getCanonicalUrl($page_url);
 
 $db->sqlreset()
     ->select('COUNT(*)')

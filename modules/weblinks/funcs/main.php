@@ -29,7 +29,7 @@ if ($weblinks_config['sortoption'] == 'byhit') {
 }
 
 $page_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
-$canonicalUrl = getCanonicalUrl($page_url, true, true);
+$canonicalUrl = getCanonicalUrl($page_url);
 
 $array_cat_content = array();
 $urllink = $page_url . '&amp;' . NV_OP_VARIABLE . '=';
