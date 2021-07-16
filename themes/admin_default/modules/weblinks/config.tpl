@@ -21,6 +21,16 @@
 				<td><input class="form-control" type="text" name="per_page" value="{DATA.per_page}" style="width:50px"/></td>
 			</tr>
 			<tr>
+				<td class="right">{LANG.homepage}</td>
+				<td>
+					<select class="form-control" name="homepage" style="width: 200px;">
+						<!-- BEGIN: homepage_option -->
+						<option value="{HOMEPAGE.key}"{HOMEPAGE.sel}>{HOMEPAGE.title}</option>
+						<!-- END: homepage_option -->
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td class="right">{LANG.weblink_config_sort}</td>
 				<td><input type="radio" name="sort" {DATA.asc} value="asc" /> {LANG.weblink_asc} <input type="radio" name="sort" {DATA.des} value="des" /> {LANG.weblink_des} </td>
 			</tr>
@@ -31,6 +41,38 @@
 			<tr>
 				<td class="right">{LANG.weblink_config_showimagelink}</td>
 				<td><input type="checkbox"  value="1" name="showlinkimage" {DATA.ck_showlinkimage} /></td>
+			</tr>
+			<tr>
+				<td class="right">{LANG.weblink_config_timeout}</td>
+				<td>
+					<select class="form-control" name="timeout" style="width: 50px;">
+						<!-- BEGIN: timeout_option -->
+						<option value="{TIMEOUT.key}"{TIMEOUT.sel}>{TIMEOUT.key}</option>
+						<!-- END: timeout_option -->
+					</select>
+					{LANG.minutes}
+				</td>
+			</tr>
+			<tr>
+				<td class="right">{LANG.report_timeout}</td>
+				<td>
+					<select class="form-control" name="report_timeout" style="width: 50px;">
+						<!-- BEGIN: report_timeout_option -->
+						<option value="{RTIMEOUT.key}"{RTIMEOUT.sel}>{RTIMEOUT.key}</option>
+						<!-- END: report_timeout_option -->
+					</select>
+					{LANG.minutes}
+				</td>
+			</tr>
+			<tr>
+				<td class="right">{LANG.new_icon}</td>
+				<td>
+					<select class="form-control" name="new_icon" style="width: 50px;">
+						<!-- BEGIN: new_icon -->
+						<option value="{NEWICON.key}"{NEWICON.sel}>{NEWICON.key}</option>
+						<!-- END: new_icon -->
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" name="submit" value="{LANG.weblink_submit}"/></td>

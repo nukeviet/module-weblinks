@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_IS_FILE_SITEINFO')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 $lang_siteinfo = nv_get_lang_module($mod);
@@ -17,18 +18,18 @@ $lang_siteinfo = nv_get_lang_module($mod);
 // Tong so link
 $number = $db->query('SELECT COUNT(*) as number FROM ' . NV_PREFIXLANG . '_' . $mod_data . '_rows where status= 1')->fetchColumn();
 if ($number > 0) {
-    $siteinfo[] = array(
+    $siteinfo[] = [
         'key' => $lang_siteinfo['siteinfo_numberlink'],
         'value' => $number
-    );
+    ];
 }
 
 // So bao cao link hong
 $number = $db->query('SELECT COUNT(*) as number FROM ' . NV_PREFIXLANG . '_' . $mod_data . '_report')->fetchColumn();
 if ($number > 0) {
-    $pendinginfo[] = array(
+    $pendinginfo[] = [
         'key' => $lang_siteinfo['siteinfo_error'],
         'value' => $number,
         'link' => NV_BASE_ADMINURL . 'index.php?' . NV_NAME_VARIABLE . '=' . $mod . '&amp;' . NV_OP_VARIABLE . '=brokenlink'
-    );
+    ];
 }

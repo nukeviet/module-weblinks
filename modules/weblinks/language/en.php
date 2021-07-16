@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @Language English
- * @License CC BY-SA (http://creativecommons.org/licenses/by-sa/4.0/)
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
 if (!defined('NV_MAINFILE')) {
-    die('Stop!!!');
+    exit('Stop!!!');
 }
 
 $lang_translator['author'] = 'VINADES.,JSC (contact@vinades.vn)';
@@ -30,20 +30,21 @@ $lang_module['report_notice'] = 'Please select weblink content to notify';
 $lang_module['report_linkdie'] = 'Died link';
 $lang_module['report_badlink'] = 'Notify bad link';
 $lang_module['report_confirm'] = 'Report';
-$lang_module['report_success'] = 'Thank for your information.We will check them as long as posible';
+$lang_module['report_success'] = 'Thank for your notification! We will check them as long as posible';
+$lang_module['report_wait'] = 'You already sent us a notification not long ago. Please wait %s to resend notification.';
 $lang_module['added'] = 'Add to date';
 $lang_module['hits'] = 'Hits';
-$lang_module['notimeout'] = 'To click,Please wait for %d munite';
+$lang_module['notimeout'] = 'To click,Please wait for %s';
 $lang_module['cat'] = 'Categories';
 $lang_module['more'] = 'Detail';
 $lang_module['visit'] = 'Visits';
-$lang_module['regiter'] = 'Registration date';
+$lang_module['regiter'] = 'Date';
 $lang_module['edit_time'] = 'Last edit';
 $lang_module['description'] = 'Detail';
-$lang_module['name'] = 'Website';
+$lang_module['name'] = 'Link';
 $lang_module['taskbar'] = 'Tool';
 $lang_module['report_note'] = 'Other';
-$lang_module['error'] = 'You must select at least 1 report type!';
 $lang_module['error_word_min'] = 'You must input at least 10 characters';
 $lang_module['view_title'] = 'Views';
 $lang_module['next_title'] = 'Next';
+$lang_module['close'] = 'Close';

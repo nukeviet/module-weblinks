@@ -1,56 +1,31 @@
 <!-- BEGIN: main -->
-<!-- BEGIN: close -->
-<script type="text/javascript">
-var howLong = 3000;
-setTimeout("self.close()", howLong);
-</script>
-<!-- END: close -->
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#othersRe').click(function() {
-		if ($(this).is(':checked')) {
-			$('#other_show').show();
-		} else {
-			$('#other_show').hide();
-		}
-	});	
-});
-</script>
-<div class="panel-body">
-	<h3>{LANG.report_notice}</h3>
-	<form class="form-inline" method="post" action="{ROW.action}">
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-hover">
-				<tbody>
-					<tr>
-						<td><input type="radio" name="report" value="1" id="report_0" checked="checked" />{LANG.report_linkdie} <input type="radio" name="report" value="2" id="report_1" />{LANG.report_badlink} </td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" value="1" id="othersRe"/><strong>{LANG.report_note}</strong></td>
-					</tr>
-					<tr id="other_show" style="display:none">
-						<td><textarea class="form-control" rows="3" name="report_note" id="report_3">{ROW.report_note}</textarea></td>
-					</tr>
-					<tr>
-						<td>
-							<input type="hidden" name="report_id" value="{ROW.id}" />
-							<input type="hidden" name="link" value="{ROW.link}" />
-							<input class="btn btn-primary" type="submit" name="submit" value="{LANG.report_confirm}"/>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
+<div id="reportForm" class="panel">
+	<div class="panel-body">
+		<h3>{LANG.report_notice}</h3>
+		<form id="report-Submit" method="post" action="{ROW.action}" onsubmit="reportSubmit(event,this)">
+			<ul class="list-group">
+				<li class="list-group-item radio">
+					<label><input type="radio" name="report" value="1" checked="checked" style="margin-top:2px" onchange="reportChange(this.form);"/> {LANG.report_linkdie}</label>
+				</li>
+				<li class="list-group-item radio">
+					<label><input type="radio" name="report" value="2" style="margin-top:2px" onchange="reportChange(this.form);"/>{LANG.report_badlink}</label>
+				</li>
+				<li class="list-group-item radio">
+					<label><input type="radio" name="report" value="0" style="margin-top:2px" onchange="reportChange(this.form);"/>{LANG.report_note}</label>
+					<div id="other_show" class="margin-top" style="display:none">
+						<textarea class="form-control" rows="3" name="report_note" maxLength="255">{ROW.report_note}</textarea>
+						<small id="report-error" class="text-danger margin-top" style="display:none">{LANG.error_word_min}</small>
+					</div>
+				</li>
+			</ul>
+			<div>
+				<input type="hidden" name="report_id" value="{ROW.id}" />
+				<input type="hidden" name="link" value="{ROW.link}" />
+				<input class="btn btn-primary" type="submit" value="{LANG.report_confirm}"/>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</form>
+	</div>
 </div>
-<!-- BEGIN: success -->
-<p class="alert alert-success">
-	{LANG.report_success}
-</p>
-<!-- END: success -->
-<!-- BEGIN: error -->
-<p class="alert alert-danger">
-	{ROW.error}
-</p>
-<!-- END: error -->
+<p id="report-success" class="alert alert-success" style="display:none"></p>
 <!-- END: main -->

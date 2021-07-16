@@ -1,7 +1,5 @@
 <!-- BEGIN: main -->
-<div id="smoothmenu_{BLOCK_ID}">
-	<ul>
-		{HTML_CONTENT}
-	</ul>
+<div id="smoothmenu_{BLOCK_ID}" class="weblink-cat">
+	{HTML_CONTENT}
 </div>
 <!-- END: main -->

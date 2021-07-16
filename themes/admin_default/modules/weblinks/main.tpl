@@ -23,7 +23,7 @@
 					<tr>
 						<td class="text-center"><input type="checkbox" onclick="nv_UncheckAll(this.form, 'idcheck[]', 'check_all[]', this.checked);" value="{ROW.id}" name="idcheck[]"></td>
 						<td>{ROW.title}</td>
-						<td>{ROW.url}</td>
+						<td><a href="{ROW.url}" target="_blank">{ROW.url}</a></td>
 						<td class="text-center">{ROW.hits_total}</td>
 						<td class="text-center">{ROW.status}</td>
 						<td class="text-center">
