@@ -70,7 +70,7 @@ if (!nv_function_exists('nv_weblink_category')) {
                 ++$level;
                 $licss = $cat['catid'] == $catid ? ' class="active"' : '';
                 $html .= '<li' . $licss . '>';
-                $html .= '<a title="' . $global_array_cat[$cat['catid']]['title'] . '" href="' . $global_array_cat[$cat['catid']]['link'] . '">' . $global_array_cat[$cat['catid']]['title'] . '</a>';
+                $html .= '<a title="' . $cat['title'] . '" href="' . $cat['link'] . '">' . $cat['title'] . '</a>';
                 $html .= nv_weblink_sub_category($cat['catid'], $level);
                 $html .= '</li>';
             }

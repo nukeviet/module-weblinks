@@ -21,7 +21,7 @@ $db->sqlreset()
 $num_items = $db->query($db->sql())
     ->fetchColumn();
 
-$db->select('id, catid, title, alias, description')
+$db->select('id, catid, title, alias, url, description')
     ->limit($limit)
     ->offset(($page - 1) * $limit);
 $result = $db->query($db->sql());
@@ -36,11 +36,11 @@ if ($num_items) {
         $array_cat_url[$catid] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $m_values['module_name'] . '&amp;' . NV_OP_VARIABLE . '=' . $alias;
     }
 
-    while (list($id, $catid, $tilterow, $alias, $content) = $result->fetch(3)) {
+    while (list($id, $catid, $tilterow, $alias, $url, $content) = $result->fetch(3)) {
         $result_array[] = [
             'link' => $array_cat_url[$catid] . '/' . $alias,
             'title' => BoldKeywordInStr($tilterow, $key, $logic),
-            'content' => BoldKeywordInStr($content, $key, $logic)
+            'content' => BoldKeywordInStr($url, $key, $logic) . '<br/>' . BoldKeywordInStr($content, $key, $logic)
         ];
     }
 }
