@@ -42,3 +42,6 @@
 !/themes/default/images/weblinks/*
 !/themes/default/modules/weblinks
 !/themes/default/modules/weblinks/*
+/.github
+/LICENSE
+/api.php
