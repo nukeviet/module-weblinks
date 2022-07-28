@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @Project NUKEVIET 4.x
- * @Author VINADES.,JSC (contact@vinades.vn)
- * @Copyright (C) 2017 VINADES.,JSC. All rights reserved
- * @License GNU/GPL version 2 or any later version
- * @Createdate 10 April 2017 17:00
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
  */
 
-if (! defined('NV_IS_FILE_ADMIN')) {
-    die('Stop!!!');
+if (!defined('NV_IS_FILE_ADMIN')) {
+    exit('Stop!!!');
 }
 
 $catid = $nv_Request->get_int('catid', 'post', 0);
@@ -17,7 +18,7 @@ $mod = $nv_Request->get_string('mod', 'post', '');
 $new_vid = $nv_Request->get_int('new_vid', 'post', 0);
 $content = 'NO_' . $catid;
 
-list($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . intval($catid) . '')->fetch(3);
+list($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . (int) $catid . '')->fetch(3);
 if ($catid > 0) {
     if ($mod == 'weight' and $new_vid > 0) {
         $sql = 'SELECT catid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid!=' . $catid . ' AND parentid=' . $parentid . ' ORDER BY weight ASC';
@@ -29,20 +30,16 @@ if ($catid > 0) {
             if ($weight == $new_vid) {
                 ++$weight;
             }
-            $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $weight . ' WHERE catid=' . intval($row['catid']);
+            $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $weight . ' WHERE catid=' . (int) ($row['catid']);
             $db->query($sql);
         }
 
-        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $new_vid . ' WHERE catid=' . intval($catid);
+        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET weight=' . $new_vid . ' WHERE catid=' . (int) $catid;
         $db->query($sql);
 
         $content = 'OK_' . $catid;
     } elseif ($mod == 'inhome' and ($new_vid == 0 or $new_vid == 1)) {
-        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET inhome=' . $new_vid . ' WHERE catid=' . intval($catid);
-        $db->query($sql);
-        $content = 'OK_' . $catid;
-    } elseif ($mod == 'numlinks' and $new_vid >= 0 and $new_vid <= 10) {
-        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET numlinks=' . $new_vid . ' WHERE catid=' . intval($catid);
+        $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET inhome=' . $new_vid . ' WHERE catid=' . (int) $catid;
         $db->query($sql);
         $content = 'OK_' . $catid;
     }

@@ -1,0 +1,251 @@
+/**
+ * NukeViet Content Management System
+ * @version 4.x
+ * @author VINADES.,JSC <contact@vinades.vn>
+ * @copyright (C) 2009-2021 VINADES.,JSC. All rights reserved
+ * @license GNU/GPL version 2 or any later version
+ * @see https://github.com/nukeviet The NukeViet CMS GitHub project
+ */
+
+.mobile-inline-block {
+    display: none;
+}
+
+.image-4-3 {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.image-4-3:before {
+    display: block;
+    content: '';
+    padding-top: 133.33%;
+}
+
+.image-4-3 img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background-color: #fcfcfc;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+}
+
+ul.cat-list {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+    display: inline-block;
+}
+
+ul.cat-list > li {
+    display: inline-block;
+}
+
+ul.cat-list > li + li:before {
+    content: ' \00bb ';
+    display: inline-block;
+    margin: 0 3px;
+}
+
+ul.cat-list.childs:before {
+    content: ' \05C0 ';
+    display: inline-block;
+    margin-left: 5px;
+}
+
+ul.cat-list.childs > li + li:before {
+    content: ' \002C ';
+    margin: 0 3px 0 0;
+}
+
+.panel-primary .panel-heading ul.cat-list.childs:before,
+.panel-primary .panel-heading ul.cat-list.childs > li,
+.panel-primary .panel-heading ul.cat-list.childs a,
+.panel-primary .panel-heading a.next-btn {
+    color: rgb(230, 230, 230);
+}
+
+.panel-primary .panel-heading ul.cat-list.childs a:hover,
+.panel-primary .panel-heading a.next-btn:hover {
+    color: rgb(255, 255, 255);
+}
+
+#weblinks .badge {
+    float: right;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+#weblinks h3 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+#weblinks .imgw img,
+#weblinks img.catimg {
+    border: 1px solid #eee;
+}
+
+#weblinks .imgw {
+    width: 100px;
+}
+
+#weblinks .catimg {
+    float: left;
+    margin-right: 5px;
+}
+
+#weblinks .more-btn {
+    color: #888;
+}
+
+#weblinks .more-btn:hover {
+    color: #000;
+}
+
+#weblinks .flex-bl {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#weblinks .flex-bl > .main {
+    flex: 1 100%;
+}
+
+#weblinks .flex-bl > .aside {
+    flex: 1 0;
+}
+
+#weblinks .flex-bl > * + * {
+    margin-left: 5px;
+}
+
+#weblinks .item:not(:last-child),
+#weblinks .cat-item:not(:last-child) {
+    margin-bottom: 18px;
+}
+
+#weblinks .item .table {
+    margin-bottom: 0;
+}
+
+#weblinks .item .table .tableleft {
+    width: 30%;
+    white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+    .mobile-inline-block {
+        display: inline-block;
+    }
+
+    #weblinks .imgw {
+        width: 60px;
+    }
+
+    #weblinks .item .table .tableleft {
+        width: 100%;
+    }
+
+    #weblinks .item .table .tableright {
+        display: none;
+    }
+}
+
+.weblink-cat {
+    margin-bottom: 10px;
+}
+
+.weblink-cat ul {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.weblink-cat a {
+    position: relative;
+    display: block;
+    padding: 10px 20px 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #555;
+    background-color: #fff;
+}
+
+.weblink-cat a:before,
+.weblink-cat a:after {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    font-size: inherit;
+}
+
+.weblink-cat a:hover {
+    background-image: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.04) 100%);
+}
+
+.weblink-cat .level-0 > li > a {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #397cb8;
+    padding-left: 10px;
+}
+
+.weblink-cat .level-1 > li > a {
+    color: #555;
+    background-color: #eeeeee;
+    border-color: #ddd;
+    padding-left: 10px;
+}
+
+.weblink-cat a:before {
+    content: '\f105';
+    margin-right: 4px;
+}
+
+.weblink-cat .level-0 > li > a:before {
+    content: '\f115';
+    margin-right: 4px;
+}
+
+.weblink-cat li.active > a:after {
+    float: right;
+    margin-right: -15px;
+    content: '\f006';
+}
+
+.weblink-cat .level-0 > li:first-child > a {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.weblink-cat .level-0 > li:last-child > a {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
