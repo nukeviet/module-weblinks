@@ -127,6 +127,10 @@ function nv_up_p1()
             $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
             try {
                 $db->query('TRUNCATE TABLE ' . $table_prefix . '_config');
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+            try {
                 $db->query("INSERT INTO " . $table_prefix . "_config (name, value) VALUES
                 ('imgwidth', '100'),
                 ('imgheight', '74'),
