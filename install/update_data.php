@@ -17,17 +17,17 @@ $nv_update_config = array();
 $nv_update_config['type'] = 1;
 
 // ID goi cap nhat
-$nv_update_config['packageID'] = 'NVUWEBLINKS4102';
+$nv_update_config['packageID'] = 'NVUWEBLINKS4500';
 
 // Cap nhat cho module nao, de trong neu la cap nhat NukeViet, ten thu muc module neu la cap nhat module
 $nv_update_config['formodule'] = 'weblinks';
 
 // Thong tin phien ban, tac gia, ho tro
-$nv_update_config['release_date'] = 1493085650;
+$nv_update_config['release_date'] = 1658966400;
 $nv_update_config['author'] = 'VINADES.,JSC (contact@vinades.vn)';
-$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-weblinks/tree/to-4.1.02';
-$nv_update_config['to_version'] = '4.1.02';
-$nv_update_config['allow_old_version'] = array('4.0.29', '4.1.00', '4.1.01');
+$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-weblinks/tree/to-4.5.00';
+$nv_update_config['to_version'] = '4.5.00';
+$nv_update_config['allow_old_version'] = array('4.0.29', '4.1.00', '4.1.01', '4.1.02');
 
 // 0:Nang cap bang tay, 1:Nang cap tu dong, 2:Nang cap nua tu dong
 $nv_update_config['update_auto_type'] = 1;
@@ -36,11 +36,18 @@ $nv_update_config['lang'] = array();
 $nv_update_config['lang']['vi'] = array();
 
 // Tiếng Việt
+$nv_update_config['lang']['vi']['nv_up_p1'] = 'Cập nhật CSDL Module';
 $nv_update_config['lang']['vi']['nv_up_finish'] = 'Đánh dấu phiên bản mới';
 
 $nv_update_config['tasklist'] = array();
 $nv_update_config['tasklist'][] = array(
-    'r' => '4.1.02',
+    'r' => '4.5.00',
+    'rq' => 1,
+    'l' => 'nv_up_p1',
+    'f' => 'nv_up_p1'
+);
+$nv_update_config['tasklist'][] = array(
+    'r' => '4.5.00',
     'rq' => 1,
     'l' => 'nv_up_finish',
     'f' => 'nv_up_finish'
@@ -51,7 +58,7 @@ $nv_update_config['tasklist'][] = array(
 Chuan hoa tra ve:
 array(
 'status' =>
-'complete' => 
+'complete' =>
 'next' =>
 'link' =>
 'lang' =>
@@ -95,6 +102,56 @@ while (list($_tmp) = $result->fetch(PDO::FETCH_NUM)) {
     }
 }
 
+
+/**
+ * nv_up_p1()
+ *
+ * @return
+ *
+ */
+function nv_up_p1()
+{
+    global $nv_update_baseurl, $db, $db_config, $nv_Cache, $array_modlang_update;
+
+    $return = array(
+        'status' => 1,
+        'complete' => 1,
+        'next' => 1,
+        'link' => 'NO',
+        'lang' => 'NO',
+        'message' => ''
+    );
+
+    foreach ($array_modlang_update as $lang => $array_mod) {
+        foreach ($array_mod['mod'] as $module_info) {
+            $table_prefix = $db_config['prefix'] . "_" . $lang . "_" . $module_info['module_data'];
+            try {
+                $db->query('TRUNCATE TABLE ' . $table_prefix . '_config');
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+            try {
+                $db->query("INSERT INTO " . $table_prefix . "_config (name, value) VALUES
+                ('imgwidth', '100'),
+                ('imgheight', '74'),
+                ('per_page', '20'),
+                ('homepage', '1'),
+                ('sort', 'des'),
+                ('sortoption', 'bytime'),
+                ('showlinkimage', '1'),
+                ('timeout', '2'),
+                ('report_timeout', '60'),
+                ('new_icon', '3')");
+            } catch (PDOException $e) {
+                trigger_error($e->getMessage());
+            }
+        }
+    }
+
+    return $return;
+}
+
+
 /**
  * nv_up_finish()
  *
@@ -114,22 +171,42 @@ function nv_up_finish()
         'message' => ''
     );
 
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/admin/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/admin/checklink.php');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/admin/delbroken.phpf');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/blocks/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/funcs/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/language/.htaccess');
+    @nv_deletefile(NV_ROOTDIR . '/modules/weblinks/checkurl.class.php');
+    @nv_deletefile(NV_ROOTDIR . '/themes/admin_default/modules/weblinks/checklink.tpl');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/bg_link_mod.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/bg_linked_mod.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/FolderWindows.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/icon-cat.gif');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/icons.gif');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/no_image.gif');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/OpenWeb.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/report-hover.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/report.png');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/images/weblinks/weblinks.gif');
+    @nv_deletefile(NV_ROOTDIR . '/themes/default/modules/weblinks/main.tpl');
+
     try {
         $num = $db->query("SELECT COUNT(*) FROM " . $db_config['prefix'] . "_setup_extensions WHERE basename='" . $nv_update_config['formodule'] . "' AND type='module'")->fetchColumn();
         $version = $nv_update_config['to_version'] . " " . $nv_update_config['release_date'];
-        
+
         if (!$num) {
             $db->query("INSERT INTO " . $db_config['prefix'] . "_setup_extensions (
                 id, type, title, is_sys, is_virtual, basename, table_prefix, version, addtime, author, note
             ) VALUES (
-                26, 'module', 'weblinks', 0, 1, 'weblinks', 'weblinks', '" . $nv_update_config['to_version'] . " " . $nv_update_config['release_date'] . "', " . NV_CURRENTTIME . ", 'VINADES.,JSC (contact@vinades.vn)', 
+                26, 'module', 'weblinks', 0, 1, 'weblinks', 'weblinks', '" . $nv_update_config['to_version'] . " " . $nv_update_config['release_date'] . "', " . NV_CURRENTTIME . ", 'VINADES.,JSC (contact@vinades.vn)',
                 'Hỗ trợ hỏi đáp'
             )");
         } else {
-            $db->query("UPDATE " . $db_config['prefix'] . "_setup_extensions SET 
-                id=26, 
-                version='" . $version . "', 
-                author='VINADES.,JSC (contact@vinades.vn)' 
+            $db->query("UPDATE " . $db_config['prefix'] . "_setup_extensions SET
+                id=26,
+                version='" . $version . "',
+                author='VINADES.,JSC (contact@vinades.vn)'
             WHERE basename='" . $nv_update_config['formodule'] . "' AND type='module'");
         }
     } catch (PDOException $e) {
