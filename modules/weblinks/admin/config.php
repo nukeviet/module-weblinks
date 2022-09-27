@@ -15,7 +15,7 @@ if (!defined('NV_IS_FILE_ADMIN')) {
 
 $page_title = $lang_module['weblink_config'];
 
-$submit = $nv_Request->get_string('submit', 'post');
+$submit = $nv_Request->get_string('submit1', 'post');
 
 $error = 0;
 
