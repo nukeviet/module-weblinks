@@ -17,15 +17,15 @@ $nv_update_config = array();
 $nv_update_config['type'] = 1;
 
 // ID goi cap nhat
-$nv_update_config['packageID'] = 'NVUWEBLINKS4500';
+$nv_update_config['packageID'] = 'NVUWEBLINKS4502';
 
 // Cap nhat cho module nao, de trong neu la cap nhat NukeViet, ten thu muc module neu la cap nhat module
 $nv_update_config['formodule'] = 'weblinks';
 
 // Thong tin phien ban, tac gia, ho tro
-$nv_update_config['release_date'] = 1658966400;
+$nv_update_config['release_date'] = 1664273599;
 $nv_update_config['author'] = 'VINADES.,JSC (contact@vinades.vn)';
-$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-weblinks/tree/to-4.5.00';
+$nv_update_config['support_website'] = 'https://github.com/nukeviet/module-weblinks/tree/to-4.5.02';
 $nv_update_config['to_version'] = '4.5.00';
 $nv_update_config['allow_old_version'] = array('4.0.29', '4.1.00', '4.1.01', '4.1.02');
 
