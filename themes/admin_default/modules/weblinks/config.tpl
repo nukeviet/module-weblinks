@@ -45,7 +45,7 @@
 			<tr>
 				<td class="right">{LANG.weblink_config_timeout}</td>
 				<td>
-					<select class="form-control" name="timeout" style="width: 50px;">
+					<select class="form-control" name="timeout" style="width: 80px;">
 						<!-- BEGIN: timeout_option -->
 						<option value="{TIMEOUT.key}"{TIMEOUT.sel}>{TIMEOUT.key}</option>
 						<!-- END: timeout_option -->
@@ -56,7 +56,7 @@
 			<tr>
 				<td class="right">{LANG.report_timeout}</td>
 				<td>
-					<select class="form-control" name="report_timeout" style="width: 50px;">
+					<select class="form-control" name="report_timeout" style="width: 80px;">
 						<!-- BEGIN: report_timeout_option -->
 						<option value="{RTIMEOUT.key}"{RTIMEOUT.sel}>{RTIMEOUT.key}</option>
 						<!-- END: report_timeout_option -->
@@ -67,7 +67,7 @@
 			<tr>
 				<td class="right">{LANG.new_icon}</td>
 				<td>
-					<select class="form-control" name="new_icon" style="width: 50px;">
+					<select class="form-control" name="new_icon" style="width: 80px;">
 						<!-- BEGIN: new_icon -->
 						<option value="{NEWICON.key}"{NEWICON.sel}>{NEWICON.key}</option>
 						<!-- END: new_icon -->
@@ -75,7 +75,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" name="submit" value="{LANG.weblink_submit}"/></td>
+				<td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" name="submit1" value="{LANG.weblink_submit}"/></td>
 			</tr>
 		</tbody>
 	</table>

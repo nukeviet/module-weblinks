@@ -3,7 +3,7 @@
 <div class="alert alert-warning">{error}</div>
 <!-- END: error -->
 <div id="list_mods">
-    <form action="{FORM_ACTION}" method="post" class="form-horizontal">
+    <form id="addContent" action="{FORM_ACTION}" method="post" class="form-horizontal">
         <input type="hidden" name ="save" value="1" />
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <td class="text-center" colspan="2">
-                            <input class="btn btn-primary" name="submit" type="submit" value="{LANG.weblink_submit}" />
+                            <input class="btn btn-primary" name="submit1" type="submit" value="{LANG.weblink_submit}" />
                         </td>
                     </tr>
                 </tbody>
@@ -76,7 +76,6 @@
         nv_open_browse(script_name + "?" + nv_name_variable + "=upload&popup=1&area=" + area + "&path=" + path + "&type=" + type, "NVImg", 850, 420, "resizable=no,scrollbars=no,toolbar=no,location=no,status=no");
         return false;
     });
-
 </script>
 <!-- BEGIN: getalias -->
 <script type="text/javascript">
