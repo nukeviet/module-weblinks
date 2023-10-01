@@ -44,13 +44,13 @@ while ($row = $querysubcat->fetch()) {
     }
 }
 
-$page_title = $lang_module['categories'];
+$page_title = $nv_Lang->getModule('categories');
 
 if ($pid > 0) {
     $ptitles = [];
     getCatPageTitle($ptitles, $pid, $array_cat);
     array_push($ptitles, [
-        'title' => $lang_module['categories'],
+        'title' => $nv_Lang->getModule('categories'),
         'link' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cat'
     ]);
 
@@ -85,23 +85,23 @@ if (!empty($savecat)) {
     }
 
     if (empty($data_content['title'])) {
-        $error = $lang_module['weblink_sub_input'];
+        $error = $nv_Lang->getModule('weblink_sub_input');
     } else {
         if ($data_content['catid'] == 0) {
             $weight = $db->query('SELECT max(weight) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE parentid=' . (int) ($data_content['parentid']) . '')->fetchColumn();
             $weight = (int) $weight + 1;
 
             $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET
-				parentid =' . (int) ($data_content['parentid']) . ',
-				weight =' . (int) $weight . ',
-				inhome =1,
-				title =:title,
-				catimage =:catimage,
-				alias =:alias,
-				description =:description,
-				keywords =:keywords,
-				add_time = ' . NV_CURRENTTIME . ',
-				edit_time =' . NV_CURRENTTIME);
+                parentid =' . (int) ($data_content['parentid']) . ',
+                weight =' . (int) $weight . ',
+                inhome =1,
+                title =:title,
+                catimage =:catimage,
+                alias =:alias,
+                description =:description,
+                keywords =:keywords,
+                add_time = ' . NV_CURRENTTIME . ',
+                edit_time =' . NV_CURRENTTIME);
             $stmt->bindParam(':title', $data_content['title'], PDO::PARAM_STR);
             $stmt->bindParam(':catimage', $data_content['catimage'], PDO::PARAM_STR);
             $stmt->bindParam(':alias', $data_content['alias'], PDO::PARAM_STR);
@@ -109,12 +109,12 @@ if (!empty($savecat)) {
             $stmt->bindParam(':keywords', $data_content['keywords'], PDO::PARAM_STR);
             $stmt->execute();
             if ($idnew = $db->lastInsertId()) {
-                nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['add_cat'], $data_content['title'], $admin_info['userid']);
+                nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('add_cat'), $data_content['title'], $admin_info['userid']);
                 $nv_Cache->delMod($module_name);
                 header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&pid=' . $data_content['parentid']);
                 exit();
             }
-            $error = $lang_module['errorsave'];
+            $error = $nv_Lang->getModule('errorsave');
         } elseif ($data_content['catid'] > 0) {
             $check_exit = 0;
 
@@ -126,14 +126,14 @@ if (!empty($savecat)) {
                 $error = 'error delete cat';
             } else {
                 $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_cat SET
-					parentid=' . (int) ($data_content['parentid']) . ',
-					title=:title,
-					catimage=:catimage,
-					alias=:alias,
-					description=:description,
-					keywords=:keywords,
-					edit_time=' . NV_CURRENTTIME . '
-					WHERE catid =' . $data_content['catid']);
+                    parentid=' . (int) ($data_content['parentid']) . ',
+                    title=:title,
+                    catimage=:catimage,
+                    alias=:alias,
+                    description=:description,
+                    keywords=:keywords,
+                    edit_time=' . NV_CURRENTTIME . '
+                    WHERE catid =' . $data_content['catid']);
                 $stmt->bindParam(':title', $data_content['title'], PDO::PARAM_STR);
                 $stmt->bindParam(':catimage', $data_content['catimage'], PDO::PARAM_STR);
                 $stmt->bindParam(':alias', $data_content['alias'], PDO::PARAM_STR);
@@ -151,12 +151,12 @@ if (!empty($savecat)) {
                     }
 
                     $nv_Cache->delMod($module_name);
-                    nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['edit_cat'], $data_content['title'], $admin_info['userid']);
+                    nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('edit_cat'), $data_content['title'], $admin_info['userid']);
 
                     header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op . '&pid=' . $data_content['parentid']);
                     exit();
                 }
-                $error = $lang_module['errorsave'];
+                $error = $nv_Lang->getModule('errorsave');
             }
         }
     }
@@ -164,21 +164,21 @@ if (!empty($savecat)) {
 
 if ($data_content['catid'] > 0) {
     $data_content = $array_cat[$data_content['catid']];
-    $caption = $lang_module['edit_cat'];
+    $caption = $nv_Lang->getModule('edit_cat');
 } else {
     $data_content['catimage'] = '';
-    $caption = $lang_module['add_cat'];
+    $caption = $nv_Lang->getModule('add_cat');
 }
 
 if (!empty($data_content['catimage']) and !nv_is_url($data_content['catimage'])) {
     $data_content['catimage'] = NV_BASE_SITEURL . NV_UPLOADS_DIR . '/' . $data_content['catimage'];
 }
 
-$lang_module['edit'] = $lang_global['edit'];
-$lang_module['delete'] = $lang_global['delete'];
+$nv_Lang->setModule('edit', $nv_Lang->getGlobal('edit'));
+$nv_Lang->setModule('delete', $nv_Lang->getGlobal('delete'));
 
 $xtpl = new XTemplate('cat.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('DATA', $data_content);
 $xtpl->assign('NV_BASE_ADMINURL', NV_BASE_ADMINURL);
 $xtpl->assign('NV_NAME_VARIABLE', NV_NAME_VARIABLE);
@@ -211,7 +211,7 @@ if (!empty($array_cat)) {
             $cat['link_add'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cat&amp;pid=' . $cat['catid'] . '';
             $cat['link_edit'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cat&amp;catid=' . $cat['catid'] . '';
             $cat['weight_select'] = drawselect_number('change', 1, $numcat, $cat['weight'], 'nv_chang_cat(this,' . $cat['catid'] . ',\'weight\');');
-            $cat['inhome_select'] = drawselect_yesno($select_name = 'slinhome', $cat['inhome'], $lang_module['weblink_no'], $lang_module['weblink_yes'], 'nv_chang_cat(this,' . $cat['catid'] . ',\'inhome\');');
+            $cat['inhome_select'] = drawselect_yesno($select_name = 'slinhome', $cat['inhome'], $nv_Lang->getModule('weblink_no'), $nv_Lang->getModule('weblink_yes'), 'nv_chang_cat(this,' . $cat['catid'] . ',\'inhome\');');
             $xtpl->assign('ROW', $cat);
             $xtpl->parse('main.data.loop');
         }

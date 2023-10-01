@@ -45,7 +45,7 @@ if ($module_info['rss']) {
     $result = $db->query($sql);
     while (list($id, $catid_i, $publtime, $title, $alias, $url, $description, $urlimg) = $result->fetch(3)) {
         !empty($description) && $description = ' [' . strip_tags($description) . ']';
-        $description = $lang_module['name'] . ': ' . $url . $description;
+        $description = $nv_Lang->getModule('name_link') . ': ' . $url . $description;
         $rimages = (!empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';
         $catalias = $global_array_cat[$catid_i]['alias'];
         $items[] = [

@@ -26,10 +26,10 @@ if ($nv_Request->isset_request('delBroken', 'post')) {
     }
 }
 
-$page_title = $lang_module['weblink_link_broken'];
+$page_title = $nv_Lang->getModule('weblink_link_broken');
 
 $xtpl = new XTemplate('link_broken.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
 $base_url = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name;
 
@@ -52,8 +52,8 @@ if ($all_page > 0) {
             'id' => $row['id'],
             'title' => $row['title'],
             'url' => $row['url'],
-            'type' => $row['type'] == 1 ? $lang_module['weblink_link_broken_die'] : ($row['type'] == 2 ? $lang_module['weblink_link_broken_bad'] : $lang_module['weblink_link_broken_other']),
-            'report_title' => sprintf($lang_module['weblink_link_broken2'], $row['title']),
+            'type' => $row['type'] == 1 ? $nv_Lang->getModule('weblink_link_broken_die') : ($row['type'] == 2 ? $nv_Lang->getModule('weblink_link_broken_bad') : $nv_Lang->getModule('weblink_link_broken_other')),
+            'report_title' => sprintf($nv_Lang->getModule('weblink_link_broken2'), $row['title']),
             'report_note' => $row['report_note'],
             'report_time_format' => nv_date('d/m/Y H:i', $row['report_time']),
             'report_ip' => $row['report_ip'],

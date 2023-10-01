@@ -80,7 +80,7 @@ $pages = nv_alias_page($page_title, $base_url, $num_items, $per_page, $page);
 $contents = call_user_func('viewcat', $subcats, $global_array_cat[$catid], $items, $pages);
 
 if ($page > 1) {
-    $page_title .= ' ' . NV_TITLEBAR_DEFIS . ' ' . $lang_global['page'] . ' ' . $page;
+    $page_title .= ' ' . NV_TITLEBAR_DEFIS . ' ' . $nv_Lang->getGlobal('page') . ' ' . $page;
 }
 
 include NV_ROOTDIR . '/includes/header.php';

@@ -24,6 +24,11 @@
 /install/
 /uploads/
 /vendor/
+/.github
+/LICENSE
+/api.php
+/mload.php
+/sload.php
 
 # Ignore fix module files and directories.
 /modules/*
@@ -42,6 +47,3 @@
 !/themes/default/images/weblinks/*
 !/themes/default/modules/weblinks
 !/themes/default/modules/weblinks/*
-/.github
-/LICENSE
-/api.php

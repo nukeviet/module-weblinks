@@ -34,7 +34,7 @@ if (defined('NV_EDITOR')) {
     require_once NV_ROOTDIR . '/' . NV_EDITORSDIR . '/' . NV_EDITOR . '/nv.php';
 }
 
-$page_title = $lang_module['weblink_add_link'];
+$page_title = $nv_Lang->getModule('weblink_add_link');
 
 $data = [
     'id' => '',
@@ -57,7 +57,7 @@ if ($data['id'] > 0) {
     $sql = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $data['id']);
     $data = $sql->fetch();
 
-    $page_title = $lang_module['weblink_edit_link'];
+    $page_title = $nv_Lang->getModule('weblink_edit_link');
 }
 
 if ($nv_Request->get_int('save', 'post,get', 0)) {
@@ -89,10 +89,10 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
     $data['status'] = ($nv_Request->get_int('status', 'post') == 1) ? 1 : 0;
     // check url
     if (empty($data['url']) || !nv_is_url($data['url']) || !check_url($data['id'], $data['url'])) {
-        $error[] = $lang_module['error_url'];
+        $error[] = $nv_Lang->getModule('error_url');
     }
     if (empty($data['title'])) {
-        $error[] = $lang_module['error_title'];
+        $error[] = $nv_Lang->getModule('error_title');
     }
 
     if (empty($error)) {
@@ -114,11 +114,11 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
             $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR, strlen($data['description']));
 
             if ($stmt->execute()) {
-                nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['weblink_edit_link'], $data['title'], $admin_info['userid']);
+                nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('weblink_edit_link'), $data['title'], $admin_info['userid']);
                 header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
                 exit();
             }
-            $error[] = $lang_module['errorsave'];
+            $error[] = $nv_Lang->getModule('errorsave');
         } else {
             $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET
 				catid =' . (int) ($data['catid']) . ',
@@ -137,12 +137,12 @@ if ($nv_Request->get_int('save', 'post,get', 0)) {
             $stmt->bindParam(':urlimg', $data['urlimg'], PDO::PARAM_STR);
             $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR, strlen($data['description']));
             if ($stmt->execute()) {
-                nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['weblink_add_link'], $data['title'], $admin_info['userid']);
+                nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('weblink_add_link'), $data['title'], $admin_info['userid']);
 
                 header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
                 exit();
             }
-            $error[] = $lang_module['errorsave'];
+            $error[] = $nv_Lang->getModule('errorsave');
         }
     }
 }
@@ -175,7 +175,7 @@ if (empty($array_cat)) {
 }
 
 $xtpl = new XTemplate('content.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('DATA', $data);
 $xtpl->assign('NV_BASE_ADMINURL', NV_BASE_ADMINURL);
 $xtpl->assign('NV_NAME_VARIABLE', NV_NAME_VARIABLE);

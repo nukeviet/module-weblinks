@@ -27,7 +27,7 @@ $check_parentid = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $mo
 if ((int) $check_parentid > 0) {
     nv_jsonOutput([
         'status' => 'error',
-        'mess' => sprintf($lang_module['delcat_msg_cat'], $check_parentid)
+        'mess' => sprintf($nv_Lang->getModule('delcat_msg_cat'), $check_parentid)
     ]);
 }
 
@@ -35,14 +35,14 @@ $check_rows = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module
 if ((int) $check_rows > 0) {
     nv_jsonOutput([
         'status' => 'error',
-        'mess' => sprintf($lang_module['delcat_msg_rows'], $check_rows)
+        'mess' => sprintf($nv_Lang->getModule('delcat_msg_rows'), $check_rows)
     ]);
 }
 
 $db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . $catid);
 nv_fix_cat($parentid);
 $nv_Cache->delMod($module_name);
-nv_insert_logs(NV_LANG_DATA, $module_name, $lang_module['weblink_del_title'], $title, $admin_info['userid']);
+nv_insert_logs(NV_LANG_DATA, $module_name, $nv_Lang->getModule('weblink_del_title'), $title, $admin_info['userid']);
 
 nv_jsonOutput([
     'status' => 'OK'

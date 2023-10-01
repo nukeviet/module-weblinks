@@ -57,7 +57,7 @@ if (!empty($row['url'])) {
 
     $timeout = filemtime($dir . '/' . $logfile);
     $timeout = $difftimeout - NV_CURRENTTIME + $timeout;
-    $contents .= sprintf($lang_module['notimeout'], nv_convertfromSec($timeout));
+    $contents .= sprintf($nv_Lang->getModule('notimeout'), nv_convertfromSec($timeout));
 }
 
 nv_info_die('', '', $contents);

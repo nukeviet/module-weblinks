@@ -13,7 +13,7 @@ if (!defined('NV_ADMIN')) {
     exit('Stop!!!');
 }
 
-$submenu['content'] = $lang_module['weblink_add_link'];
-$submenu['cat'] = $lang_module['weblink_catlist'];
-$submenu['brokenlink'] = $lang_module['weblink_link_broken'];
-$submenu['config'] = $lang_module['weblink_config'];
+$submenu['content'] = $nv_Lang->getModule('weblink_add_link');
+$submenu['cat'] = $nv_Lang->getModule('weblink_catlist');
+$submenu['brokenlink'] = $nv_Lang->getModule('weblink_link_broken');
+$submenu['config'] = $nv_Lang->getModule('weblink_config');

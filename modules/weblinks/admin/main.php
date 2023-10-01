@@ -13,10 +13,10 @@ if (!defined('NV_IS_FILE_ADMIN')) {
     exit('Stop!!!');
 }
 
-$page_title = $lang_module['link_list'];
+$page_title = $nv_Lang->getModule('link_list');
 
 $xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('FORM_ACTION', NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=multidel');
 
 $all_page = $db->query('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows')->fetchColumn();
@@ -38,7 +38,7 @@ while ($row = $result->fetch()) {
         'title' => $row['title'],
         'url' => $row['url'],
         'hits_total' => $row['hits_total'],
-        'status' => $row['status'] == 1 ? $lang_module['weblink_yes'] : $lang_module['weblink_no'],
+        'status' => $row['status'] == 1 ? $nv_Lang->getModule('weblink_yes') : $nv_Lang->getModule('weblink_no'),
         'url_edit' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=content&amp;id=' . $row['id'],
         'url_delete' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=del_link&amp;id=' . $row['id']
     ]);

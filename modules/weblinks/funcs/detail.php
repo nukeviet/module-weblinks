@@ -14,7 +14,7 @@ if (!defined('NV_IS_MOD_WEBLINKS')) {
 }
 
 $key_words = $module_info['keywords'];
-$mod_title = isset($lang_module['main_title']) ? $lang_module['main_title'] : $module_info['custom_title'];
+$mod_title = $nv_Lang->existsModule('main_title') ? $nv_Lang->getModule('main_title') : $module_info['custom_title'];
 
 global $global_array_cat;
 

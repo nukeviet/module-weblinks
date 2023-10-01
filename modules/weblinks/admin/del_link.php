@@ -48,13 +48,13 @@ if (!empty($del_array)) {
         }
         if ($a > 0) {
             $nv_Cache->delMod($module_name);
-            $contents = 'OK_' . $lang_module['weblink_del_success'];
+            $contents = 'OK_' . $nv_Lang->getModule('weblink_del_success');
         } else {
-            $contents = 'NO_' . $lang_module['weblink_del_error'];
+            $contents = 'NO_' . $nv_Lang->getModule('weblink_del_error');
         }
     }
 } else {
-    $contents = 'NO_' . $lang_module['weblink_del_err'];
+    $contents = 'NO_' . $nv_Lang->getModule('weblink_del_err');
 }
 
 include NV_ROOTDIR . '/includes/header.php';

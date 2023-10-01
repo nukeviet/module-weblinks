@@ -13,7 +13,7 @@ if (!defined('NV_IS_FILE_ADMIN')) {
     exit('Stop!!!');
 }
 
-$page_title = $lang_module['weblink_config'];
+$page_title = $nv_Lang->getModule('weblink_config');
 
 $submit = $nv_Request->get_string('submit1', 'post');
 
@@ -57,14 +57,14 @@ $xtpl->assign('NV_NAME_VARIABLE', NV_NAME_VARIABLE);
 $xtpl->assign('MODULE_NAME', $module_name);
 $xtpl->assign('NV_OP_VARIABLE', NV_OP_VARIABLE);
 $xtpl->assign('OP', $op);
-$xtpl->assign('LANG', $lang_module);
+$xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 $xtpl->assign('DATA', $weblinks_config);
 
 $homepage_options = [1, 2];
 foreach ($homepage_options as $option) {
     $xtpl->assign('HOMEPAGE', [
         'key' => $option,
-        'title' => $lang_module['homepage_' . $option],
+        'title' => $nv_Lang->getModule('homepage_' . $option),
         'sel' => $weblinks_config['homepage'] == $option ? ' selected' : ''
     ]);
     $xtpl->parse('main.homepage_option');

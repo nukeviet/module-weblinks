@@ -21,10 +21,10 @@ if (!defined('NV_IS_MOD_WEBLINKS')) {
  */
 function main_theme($array_cat)
 {
-    global $module_info, $lang_module, $weblinks_config;
+    global $module_info, $weblinks_config, $nv_Lang;
 
     $xtpl = new XTemplate('main_page.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     foreach ($array_cat as $catid => $array_cat_i) {
         if (!empty($array_cat_i) and !empty($array_cat_i['count_link'])) {
@@ -94,10 +94,10 @@ function main_theme($array_cat)
  */
 function main_list_theme($items, $pages = '')
 {
-    global $module_info, $lang_module, $weblinks_config;
+    global $module_info, $weblinks_config, $nv_Lang;
 
     $xtpl = new XTemplate('main_list.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     if (!empty($items)) {
         foreach ($items as $item) {
@@ -153,10 +153,10 @@ function main_list_theme($items, $pages = '')
  */
 function viewcat($subcats, $cat, $items, $pages = '')
 {
-    global $module_info, $lang_module, $weblinks_config;
+    global $module_info, $weblinks_config, $nv_Lang;
 
     $xtpl = new XTemplate('viewcat.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     if (!empty($cat['catimage'])) {
         if (!nv_is_url($cat['catimage'])) {
@@ -232,10 +232,10 @@ function viewcat($subcats, $cat, $items, $pages = '')
  */
 function detail($row)
 {
-    global $module_info, $lang_module;
+    global $module_info, $nv_Lang;
 
     $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
 
     $row['add_time'] = nv_date('H:i l - d/m/Y', $row['add_time']);
     $row['edit_time'] = nv_date('H:i l - d/m/Y', $row['edit_time']);
@@ -267,10 +267,10 @@ function detail($row)
  */
 function report($row)
 {
-    global $module_info, $lang_module;
+    global $module_info, $nv_Lang;
 
     $xtpl = new XTemplate('report.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
-    $xtpl->assign('LANG', $lang_module);
+    $xtpl->assign('LANG', \NukeViet\Core\Language::$lang_module);
     $xtpl->assign('ROW', $row);
     $xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
 

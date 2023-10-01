@@ -15,7 +15,7 @@ if (!defined('NV_IS_MOD_WEBLINKS')) {
 
 $page_title = $module_info['site_title'];
 $key_words = $module_info['keywords'];
-$mod_title = isset($lang_module['main_title']) ? $lang_module['main_title'] : $module_info['custom_title'];
+$mod_title = $nv_Lang->existsModule('main_title') ? $nv_Lang->getModule('main_title') : $module_info['custom_title'];
 
 if ($weblinks_config['sortoption'] == 'byhit') {
     $orderby = 'hits_total';
@@ -112,7 +112,7 @@ if ((int) $weblinks_config['homepage'] == 2) {
     $contents = call_user_func('main_list_theme', $items, $pages);
 
     if ($page > 1) {
-        $page_title .= ' ' . NV_TITLEBAR_DEFIS . ' ' . $lang_global['page'] . ' ' . $page;
+        $page_title .= ' ' . NV_TITLEBAR_DEFIS . ' ' . $nv_Lang->getGlobal('page') . ' ' . $page;
     }
 }
 

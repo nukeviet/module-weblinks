@@ -11,7 +11,7 @@
             <table class="table table-striped table-bordered">
                 <tbody>
                     <tr>
-                        <td class="tableleft"><strong>{LANG.name}:</strong> <span class="mobile-inline-block"><a href="{DETAIL.visit}" target="_blank" title="{DETAIL.title}"><em class="fa fa-link margin-right-sm"></em>{DETAIL.url}</a></span></td>
+                        <td class="tableleft"><strong>{LANG.name_link}:</strong> <span class="mobile-inline-block"><a href="{DETAIL.visit}" target="_blank" title="{DETAIL.title}"><em class="fa fa-link margin-right-sm"></em>{DETAIL.url}</a></span></td>
                         <td class="tableright"><a title="{DETAIL.title}" href="{DETAIL.visit}" target="_blank"><em class="fa fa-link margin-right-sm"></em><strong>{DETAIL.url}</strong></a></td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@
     </div>
     <!-- BEGIN: des -->
     <div class="margin-bottom-sm">
-        <strong>{LANG.description}: </strong>
+        <strong>{LANG.description_detail}: </strong>
     </div>
     <div>
         {DETAIL.description}

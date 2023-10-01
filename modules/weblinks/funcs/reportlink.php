@@ -32,7 +32,7 @@ if (!empty($row)) {
     $pass = !empty($weblinks_config['report_timeout']) ? ((int) $weblinks_config['report_timeout'] * 60) : 3600;
     $pass = $pass - NV_CURRENTTIME + $last_report;
     if ($pass > 0) {
-        nv_htmlOutput(sprintf($lang_module['report_wait'], nv_convertfromSec($pass)));
+        nv_htmlOutput(sprintf($nv_Lang->getModule('report_wait'), nv_convertfromSec($pass)));
     }
 
     if ($submit and $report_id) {
@@ -45,7 +45,7 @@ if (!empty($row)) {
         if ($report == 0 and 10 >= nv_strlen($report_note)) {
             nv_jsonOutput([
                 'status' => 'error',
-                'mess' => $lang_module['error_word_min']
+                'mess' => $nv_Lang->getModule('error_word_min')
             ]);
         }
 
@@ -74,7 +74,7 @@ if (!empty($row)) {
 
         nv_jsonOutput([
             'status' => 'success',
-            'mess' => $lang_module['report_success']
+            'mess' => $nv_Lang->getModule('report_success')
         ]);
     }
 

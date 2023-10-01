@@ -19,12 +19,12 @@
 
     <!-- BEGIN: loop -->
     <div class="item">
-		<a class="pull-right btn btn-default btn-xs more-btn" href="{ITEM.link}">{LANG.more}<em class="fa fa-angle-right margin-left-sm"></em></a>
-		<h3>
+        <a class="pull-right btn btn-default btn-xs more-btn" href="{ITEM.link}">{LANG.more}<em class="fa fa-angle-right margin-left-sm"></em></a>
+        <h3>
             <a href="{ITEM.link}"><strong>{ITEM.title}</strong></a>
-			<!-- BEGIN: new_icon -->
-			<img src="{NV_STATIC_URL}themes/default/images/icons/new.gif" alt=""/>
-			<!-- END: new_icon -->
+            <!-- BEGIN: new_icon -->
+            <img src="{NV_STATIC_URL}themes/default/images/icons/new.gif" alt=""/>
+            <!-- END: new_icon -->
         </h3>
         <div class="flex-bl">
             <!-- BEGIN: img -->
@@ -38,7 +38,7 @@
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <td class="tableleft">{LANG.name}: <span class="mobile-inline-block"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></span></td>
+                            <td class="tableleft">{LANG.name_link}: <span class="mobile-inline-block"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></span></td>
                             <td class="tableright"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></td>
                         </tr>
                         <tr>

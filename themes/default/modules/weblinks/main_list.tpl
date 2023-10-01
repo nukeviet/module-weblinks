@@ -21,7 +21,7 @@
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <td class="tableleft">{LANG.name}: <span class="mobile-inline-block"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></span></td>
+                            <td class="tableleft">{LANG.name_link}: <span class="mobile-inline-block"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></span></td>
                             <td class="tableright"><a href="{ITEM.visit}" target="_blank" title="{ITEM.title}"><em class="fa fa-link margin-right-sm"></em>{ITEM.url}</a></td>
                         </tr>
                         <tr>
