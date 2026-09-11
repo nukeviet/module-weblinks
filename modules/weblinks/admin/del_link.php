@@ -32,7 +32,7 @@ if ($listid != '') {
 if (!empty($del_array)) {
     $a = 0;
     foreach ($del_array as $id) {
-        list($id, $title, $urlimg) = $db->query('SELECT id, title, urlimg  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $id)->fetch(3);
+        list($id, $title, $urlimg) = $db->query('SELECT id, title, urlimg  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id=' . $id)->fetch(3) ?: [null, null, null];
         if ($id > 0) {
             nv_insert_logs(NV_LANG_DATA, $module_name, 'log_del_rows', $title, $admin_info['userid']);
 

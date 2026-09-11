@@ -32,11 +32,15 @@ if ($num_items) {
 
     $sql_cat = 'SELECT catid, alias FROM ' . NV_PREFIXLANG . '_' . $m_values['module_data'] . '_cat';
     $re_cat = $db->query($sql_cat);
-    while (list($catid, $alias) = $re_cat->fetch(3)) {
+    while ($_scratch = $re_cat->fetch(3)) {
+        list($catid, $alias) = $_scratch;
+        unset($_scratch);
         $array_cat_url[$catid] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $m_values['module_name'] . '&amp;' . NV_OP_VARIABLE . '=' . $alias;
     }
 
-    while (list($id, $catid, $tilterow, $alias, $url, $content) = $result->fetch(3)) {
+    while ($_scratch = $result->fetch(3)) {
+        list($id, $catid, $tilterow, $alias, $url, $content) = $_scratch;
+        unset($_scratch);
         $result_array[] = [
             'link' => $array_cat_url[$catid] . '/' . $alias,
             'title' => BoldKeywordInStr($tilterow, $key, $logic),

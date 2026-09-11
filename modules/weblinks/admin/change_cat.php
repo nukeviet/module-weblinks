@@ -18,7 +18,7 @@ $mod = $nv_Request->get_string('mod', 'post', '');
 $new_vid = $nv_Request->get_int('new_vid', 'post', 0);
 $content = 'NO_' . $catid;
 
-list($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . (int) $catid . '')->fetch(3);
+list($catid, $parentid) = $db->query('SELECT catid, parentid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . (int) $catid . '')->fetch(3) ?: [null, null];
 if ($catid > 0) {
     if ($mod == 'weight' and $new_vid > 0) {
         $sql = 'SELECT catid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid!=' . $catid . ' AND parentid=' . $parentid . ' ORDER BY weight ASC';

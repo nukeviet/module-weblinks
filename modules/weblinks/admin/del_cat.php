@@ -15,7 +15,7 @@ if (!defined('NV_IS_FILE_ADMIN')) {
 
 $catid = $nv_Request->get_int('catid', 'post', 0);
 
-list($catid, $parentid, $title) = $db->query('SELECT catid, parentid,title FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . $catid)->fetch(3);
+list($catid, $parentid, $title) = $db->query('SELECT catid, parentid,title FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat WHERE catid=' . $catid)->fetch(3) ?: [null, null, null];
 if (empty($catid)) {
     nv_jsonOutput([
         'status' => 'error',

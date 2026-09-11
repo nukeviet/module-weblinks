@@ -43,7 +43,9 @@ if (!empty($catid)) {
 }
 if ($module_info['rss']) {
     $result = $db->query($sql);
-    while (list($id, $catid_i, $publtime, $title, $alias, $url, $description, $urlimg) = $result->fetch(3)) {
+    while ($_scratch = $result->fetch(3)) {
+        list($id, $catid_i, $publtime, $title, $alias, $url, $description, $urlimg) = $_scratch;
+        unset($_scratch);
         !empty($description) && $description = ' [' . strip_tags($description) . ']';
         $description = $lang_module['name'] . ': ' . $url . $description;
         $rimages = (!empty($urlimg)) ? '<img src="' . NV_BASE_SITEURL . NV_ASSETS_DIR . '/' . $urlimg . '" width="100" align="left" border="0">' : '';

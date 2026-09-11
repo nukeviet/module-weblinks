@@ -70,7 +70,9 @@ if ($module_info['rss']) {
 $sql = 'SELECT catid, parentid, title, description, catimage, alias, keywords, inhome  FROM ' . NV_PREFIXLANG . '_' . $module_data . '_cat ORDER BY parentid, weight';
 $result = $db->query($sql);
 
-while (list($catid_i, $parentid_i, $title_i, $description_i, $catimage_i, $alias_i, $keywords_i, $inhome_i) = $result->fetch(3)) {
+while ($_scratch = $result->fetch(3)) {
+    list($catid_i, $parentid_i, $title_i, $description_i, $catimage_i, $alias_i, $keywords_i, $inhome_i) = $_scratch;
+    unset($_scratch);
     $link_i = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $alias_i;
 
     $sql1 = 'SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE catid = ' . $catid_i;

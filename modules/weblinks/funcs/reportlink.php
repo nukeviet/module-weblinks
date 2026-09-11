@@ -81,5 +81,5 @@ if (!empty($row)) {
     $contents = call_user_func('report', $row);
     nv_htmlOutput($contents);
 } else {
-    trigger_error("you don't permission to access!!!", 256);
+    throw new \NukeViet\Http\HttpException("you don't permission to access!!!", 403);
 }
